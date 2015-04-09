@@ -7,12 +7,11 @@
 #include <cstdlib>
 
 using namespace std;
-//this function splits string into separate words and places into a vector
-vector<char> splitter(char input[999])
+//this function splits string into separate words and places into an array
+char* splitter(char* input)
 {
-    vector <char> words;
+    char * result;//resulting storage array
     int currcount=0;//counter of current word
-    string store;//storage for words that come from inputted string
 
     //there are a few cases we need to consider
     //Cases include " ", ";", "#" 
@@ -20,16 +19,10 @@ vector<char> splitter(char input[999])
     {
         if(input[i]=='#')
         {
-            words.push_back(input[i]);
-            words.push_back(';');
-            store="";
             break;
         }
         else if(input[i] == ';')
         {
-            words.push_back(' ');
-            words.push_back(input[i]);
-            words.push_back(' ');
         }
         else if(input[i] == ' ')
         {
@@ -37,7 +30,7 @@ vector<char> splitter(char input[999])
         }
    
     }
-    return words;
+    return result;
 }
 int main()
 {
@@ -47,16 +40,34 @@ int main()
     string stringinput;
     char resultstring[999];
     char input[999];
+    int counter=0;
     while(1)
     {
         cout << username << "@" << hostname << "$ ";
         getline(cin, stringinput);
         strcpy(input, stringinput.c_str());
         strcpy(resultstring, stringinput.c_str());
-        vector<char> words=splitter(input);
+        char *storage=strtok(input," ");
+        if(strcmp(storage,"exit")==0)
+                exit(1);
         for(int i=0; input!='\0'; i++)
         {        
-            cout << words[i];
+            cout << storage[i];
+            int pid =fork();
+            if(pid==-1)
+            {        
+                perror("This is an error with fork()");
+                exit(1);
+            }
+            else if(pid==0)
+            {
+            
+            }
+            else if(pid==1)
+            {
+    
+            }
+            counter++;
         }
         /*if(words[i]=="exit" || words[i]=="Exit")
         {
