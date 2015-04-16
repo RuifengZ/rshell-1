@@ -20,7 +20,10 @@ int main()
     string stringinput;
     int inputcnt=0;
     char* input[999];
-    const char ands[]="&&";
+    char_separator<char> ands("&&");
+    char_separator<char> ors("||");
+    char_separator<char> semico(";");
+    tokenizer<char_separator<char> > toke(stringinput, ands);
     while(1)
     {
         //if the user name and hostname both exists, then the program displays it before the dollar sign.
@@ -41,10 +44,13 @@ int main()
            stringinput=stringinput.substr(0,stringinput.find("#"));
        }
        if(stringinput.find("&&")!=string::npos)
-                char_separator<char> sep("&&");
-                tokenizer<char_separator<char> > toker(stringinput,sep);
-                for(tokenizer<char_separator<char> >::iterator it=toker.                          begin(); it != toker.end(); it++)
-                {        
+       {
+                tokenizer<char_separator<char> >::iterator it=toke.begin();
+                for(; it != toke.end(); it++)
+                {       
+                    string tempit=*it;
+                    char_separator<char> sep(" ");
+                    tokenizer<char_separator<char> > tok(tempit,sep);
                     int status=0;
                     pid_t pid = fork();
                     if(pid==-1)
@@ -54,10 +60,10 @@ int main()
                     }
                     else if(pid==0)
                     {
-                        char_separator<char> sep(" ");
-                        tokenizer<char_separator<char> > tok(*it, sep);
+                        
                         int counter=0;
-                        for(tokenizer<char_separator<char> >::iterator it1=tok.                          begin(); it1 != tok.end(); it1++)
+                        tokenizer<char_separator<char> >::iterator it1=tok.begin();
+                        for(; it1 != tok.end(); it1++)
                         {
                             counter++;
                             input[counter]=new char[(*it1).size()];
@@ -86,7 +92,7 @@ int main()
     }       
     return 0;
 }
-
+}
 
 
 
