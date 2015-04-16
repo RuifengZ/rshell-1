@@ -11,20 +11,15 @@ using namespace std;
 using namespace boost;
 int main()
 {
-    bool semicolon=0;
-    bool doubleand=0;
-    bool doubleor=0;
     string username=getlogin();
     char hostname[999];
     gethostname(hostname, 999);
     string stringinput;
-    int inputcnt=0;
     char* input[999];
     char_separator<char> ands("&&");
     char_separator<char> ors("||");
     char_separator<char> semico(";");
-    tokenizer<char_separator<char> > toke(stringinput, ands);
-    while(1)
+    while(true)
     {
         //if the user name and hostname both exists, then the program displays it before the dollar sign.
         if(getlogin() != '\0' && gethostname(hostname,999) != -1)    
@@ -33,8 +28,7 @@ int main()
                 perror("your hostname or username couldn't be found!");
                 cout << "$ ";
         }
-        //takes in a string input
-        getline(cin, stringinput);
+        getline(cin,stringinput);
         //this checks for exit and Exit command 
         if(stringinput.find("exit")==0||stringinput.find("Exit")==0)
                 exit(1);
@@ -43,14 +37,14 @@ int main()
        {
            stringinput=stringinput.substr(0,stringinput.find("#"));
        }
-       if(stringinput.find("&&")!=string::npos)
+       if(stringinput.find("&&")!=string::npos || stringinput.find(";")!=string::npos || stringinput.find("||") )
        {
+                tokenizer<char_separator<char> > toke(stringinput,semico);
                 tokenizer<char_separator<char> >::iterator it=toke.begin();
                 for(; it != toke.end(); it++)
-                {       
-                    string tempit=*it;
-                    char_separator<char> sep(" ");
-                    tokenizer<char_separator<char> > tok(tempit,sep);
+                {      
+                    char_separator<char> space(" ");
+                    tokenizer<char_separator<char> > tok(*it, space);
                     int status=0;
                     pid_t pid = fork();
                     if(pid==-1)
@@ -60,12 +54,11 @@ int main()
                     }
                     else if(pid==0)
                     {
-                        
                         int counter=0;
-                        tokenizer<char_separator<char> >::iterator it1=tok.begin();
-                        for(; it1 != tok.end(); it1++)
+                        for(tokenizer<char_separator<char> >::iterator 
+                                it1=tok.begin(); it1 != tok.end(); 
+                                it1++,counter++)
                         {
-                            counter++;
                             input[counter]=new char[(*it1).size()];
                             strcpy(input[counter],(*it1).c_str());
                         }
@@ -82,16 +75,17 @@ int main()
                     }
                     else if(pid>=1)
                     {
-                        if(waitpid(-1,&status,0)==-1)
-                        {
+                        waitpid(-1,&status,0);
+                        /*{
                                 perror("Please take care of your child!");
                                 exit(1);
-                        }
+                        }*/
                     }
                 }
-    }       
+    }
+    }
     return 0;
-}
+
 }
 
 
