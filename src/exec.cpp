@@ -37,8 +37,104 @@ int main()
        {
            stringinput=stringinput.substr(0,stringinput.find("#"));
        }
-       if(stringinput.find("&&")!=string::npos || stringinput.find(";")!=string::npos || stringinput.find("||") )
+       if(stringinput.find("||")!=string::npos )
        {
+                tokenizer<char_separator<char> > toke(stringinput,ors);
+                tokenizer<char_separator<char> >::iterator it=toke.begin();
+                for(; it != toke.end(); it++)
+                {      
+                    char_separator<char> space(" ");
+                    tokenizer<char_separator<char> > tok(*it, space);
+                    int status=0;
+                    pid_t pid = fork();
+                    if(pid==-1)
+                    {        
+                        perror("this is an error with fork()");
+                        exit(1);
+                    }
+                    else if(pid==0)
+                    {
+                        int counter=0;
+                        for(tokenizer<char_separator<char> >::iterator 
+                                it1=tok.begin(); it1 != tok.end(); 
+                                it1++,counter++)
+                        {
+                            input[counter]=new char[(*it1).size()];
+                            strcpy(input[counter],(*it1).c_str());
+                        }
+                        input[counter]=0;
+                        int good=execvp(input[0],input);
+                        if(good==-1)
+                        {
+                                perror("Command is bad and not good!");
+                                exit(1);
+                        }
+                        else{
+                                cout << "Good!" << execvp(input[0],input) << endl;
+                        }
+                    }
+                    else if(pid>=1)
+                    {
+                        waitpid(-1,&status,0);
+                        if(status<=0)
+                                break;
+                        /*{
+                                perror("Please take care of your child!");
+                                exit(1);
+                        }*/
+                    }
+                }
+            }
+           else  if(stringinput.find("&&")!=string::npos )
+            {
+                tokenizer<char_separator<char> > toke(stringinput,ands);
+                tokenizer<char_separator<char> >::iterator it=toke.begin();
+                for(; it != toke.end(); it++)
+                {      
+                    char_separator<char> space(" ");
+                    tokenizer<char_separator<char> > tok(*it, space);
+                    int status=0;
+                    pid_t pid = fork();
+                    if(pid==-1)
+                    {        
+                        perror("this is an error with fork()");
+                        exit(1);
+                    }
+                    else if(pid==0)
+                    {
+                        int counter=0;
+                        for(tokenizer<char_separator<char> >::iterator 
+                                it1=tok.begin(); it1 != tok.end(); 
+                                it1++,counter++)
+                        {
+                            input[counter]=new char[(*it1).size()];
+                            strcpy(input[counter],(*it1).c_str());
+                        }
+                        input[counter]=0;
+                        int good=execvp(input[0],input);
+                        if(good==-1)
+                        {
+                                perror("Command is bad and not good!");
+                                exit(1);
+                        }
+                        else{
+                                cout << "Good!" << execvp(input[0],input) << endl;
+                        }
+                    }
+                    else if(pid>=1)
+                    {
+                        waitpid(-1,&status,0);
+                        if(status > 0)
+                            break;
+                        /*{
+                                perror("Please take care of your child!");
+                                exit(1);
+                        }*/
+                    }
+                }
+            }
+            else
+                {
                 tokenizer<char_separator<char> > toke(stringinput,semico);
                 tokenizer<char_separator<char> >::iterator it=toke.begin();
                 for(; it != toke.end(); it++)
@@ -83,6 +179,8 @@ int main()
                     }
                 }
     }
+
+ 
     }
     return 0;
 
