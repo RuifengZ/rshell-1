@@ -64,6 +64,8 @@ int main()
                         }
                         input[counter]=0;
                         int good=execvp(input[0],input);
+                        if(strcmp(input[0],"exit")==0)
+                                exit(1);
                         if(good==-1)
                         {
                                 perror("Command is bad and not good!");
@@ -112,7 +114,9 @@ int main()
                         }
                         input[counter]=0;
                         int good=execvp(input[0],input);
-                        if(good==-1)
+                        if(strcmp(input[0],"exit")==0)
+                                exit(1);
+                       if(good==-1)
                         {
                                 perror("Command is bad and not good!");
                                 exit(1);
@@ -160,7 +164,9 @@ int main()
                         }
                         input[counter]=0;
                         int good=execvp(input[0],input);
-                        if(good==-1)
+                       if(strcmp(input[0],"exit")==0)
+                               exit(1);
+                       if(good==-1)
                         {
                                 perror("Command is bad and not good!");
                                 exit(1);
