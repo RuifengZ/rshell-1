@@ -20,5 +20,10 @@ To install and run rshell on your computer, open terminal and type the following
 -The "#" symbol: Anything after this symbol will be a comment.
 -In order to exit the program, simply type "exit".
 ###Bugs and Limitations
--If you type 3 or more consecutive "&" like "&&&", this program will treat it as "&&". The same applies to "|". 
-
+-If you type 3 or more consecutive "&" like "&&&", this program will treat it as "&&". The same applies to "|" and ";". 
+-Having one symbol will not execute commands.
+-uses boost library so you need to install boost when using this program.
+-does not support " " (quotes) in this version
+-if you use (ls &&), it will execute ls.
+-if you use (&& ls ), it will execute ls too.
+-Hostname and Username have a 999 character maximum.
