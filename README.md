@@ -5,7 +5,7 @@ This program is a bash terminal that runs bash commands located in /bin. Example
 ### Installation
 To install and run rshell on your computer, open terminal and type the following commands:
 
-`
+```
 1. git clone http://www.github.com/kchan049/rshell.git
 
 2. cd rshell
@@ -15,8 +15,10 @@ To install and run rshell on your computer, open terminal and type the following
 4. make
 
 5. bin/rshell
-`
+```
+
 ###Program Features
+
 -Rshell supports all the bash commands located in /bin.
 
 -Rshell also supports connectors such as ";", "&&", and "||".
