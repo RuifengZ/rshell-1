@@ -35,6 +35,7 @@ int main()
         {
             stringinput=stringinput.substr(0,stringinput.find("#"));
         }
+        //this checks for ||
         if(stringinput.find("||")!=string::npos )
         {
             tokenizer<char_separator<char> > toke(stringinput,ors);
@@ -82,6 +83,7 @@ int main()
             if(stringinput.find("exit")!=string::npos)
                 continue;
         }
+        //this checks for &&
         else if(stringinput.find("&&")!=string::npos )
         {
             if(stringinput.find("exit")!=string::npos)
@@ -129,6 +131,7 @@ int main()
                 }
             }
         }
+        //this checks for ; and other things
         else
         {
             tokenizer<char_separator<char> > toke(stringinput,semico);
@@ -144,8 +147,10 @@ int main()
                     perror("this is an error with fork()");
                     exit(1);
                 }
+                //checks on the child
                 else if(pid==0)
                 {
+                    //starts to parse and token
                     int counter=0;
                     tokenizer<char_separator<char> >::iterator 
                     it1=tok.begin();
@@ -158,6 +163,7 @@ int main()
                     input[counter]=0;
                     
                     int good=execvp(input[0],input);
+                    //finds a invalid command
                     if(good==-1)
                     {
                         perror("Command is bad and not good!");
@@ -171,6 +177,7 @@ int main()
                 else if(pid>=1)
                 {
                     waitpid(-1,&status,0);
+                    //waits for the child to finish
                 }
             }
         }
