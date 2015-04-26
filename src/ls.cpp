@@ -10,6 +10,9 @@
 #include <cstdlib>
 #include <algorithm>
 #include <cassert>
+#include <pwd.h>
+#include <grp.h>
+
 using namespace std;
 
 #define GREEN   "\033[32m" //Green color for executables
