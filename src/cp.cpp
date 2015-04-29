@@ -1,4 +1,4 @@
-nclude "timer.h"
+#include "timer.h"
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
