@@ -18,6 +18,52 @@ using namespace std;
 #define GREEN   "\033[32m" //Green color for executables
 #define BLUE    "\033[34m" //Blue color for directories
 #define GRAY  "\033[47m" //Gray color for hidden files
+#define REG   "\033[0m"//regular color
+#define HIDDEN  "\033[47m" //hidden files
+
+void color(string file, struct stat name)
+{
+	//Checking Hidden Directories
+	if(files[0]=='.' &&(name.st_mode&S_IFDIR))
+	{
+		cout << HIDDEN << BLUE;
+		cout << files;
+		cout << REG;
+	}
+	//Checking Hidden Executables
+	if(files[0]=='.' && (name.st_mode&x_IXUSR))
+	{
+		cout << HIDDEN << GREEN;
+		cout << files;
+		cout << REG;
+	}
+	//Checking Hidden files only
+	if(files[0]=='.')
+	{
+		cout << HIDDEN;
+		cout << files;
+		cout << REG;
+	}
+	//Checking Directories
+	if(name.st_mode & S_IFDIR)
+	{
+		cout << BLUE;
+		cout << files;
+		cout << REG;
+	}
+	//Checking executables
+	{
+		if(name.st_mode & S_IXUSR)
+		{
+			cout << GREEN;
+			cout << files;
+			cout << REG;
+		}	
+	}
+	//Checking regular files
+	cout << files << REG;
+}
+
 
 void lprint(struct stat name)
 {
@@ -68,18 +114,31 @@ void lprint(struct stat name)
         cout << '-';
     cout << ' ' << name.st_nlink << ' ';
     struct passwd* pw=getpwuid(name.st_uid);
-    struct group* gp=getgrgid(name.st_gid);
     if(!pw)
     {
         perror("Failed to get pwuid");
         exit(1);
     }
+    struct group* gp=getgrgid(name.st_gid);
     if(!gp)
     {
         perror("Failed to get grgid");
     }
     cout << pw->pw_name << ' ';
     cout << gp->gr_name << ' ';
+	cout << setw(5) << right;
+	cout << name.st_size << ' ';
+	//time last modified
+	char buff[80];
+	struct tm* time=localtime(&name.st_mtime);	
+	if(!strftime(buff,80,"%b %d %H: %M",time))
+	{
+		perror("strftime function error");	
+		exit(1);
+	}
+	cout << buff << ' ';
+	
+	
 }
 
 int main(int argc, char* argv[])
