@@ -12,6 +12,7 @@
 #include <cassert>
 #include <pwd.h>
 #include <grp.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -21,7 +22,7 @@ using namespace std;
 #define REG   "\033[0m"//regular color
 #define HIDDEN  "\033[47m" //hidden files
 
-void color(string file, struct stat name)
+void color(string files, struct stat name)
 {
 	//Checking Hidden Directories
 	if(files[0]=='.' &&(name.st_mode&S_IFDIR))
@@ -31,7 +32,7 @@ void color(string file, struct stat name)
 		cout << REG;
 	}
 	//Checking Hidden Executables
-	if(files[0]=='.' && (name.st_mode&x_IXUSR))
+	if(files[0]=='.' && (name.st_mode&S_IXUSR))
 	{
 		cout << HIDDEN << GREEN;
 		cout << files;
@@ -64,6 +65,22 @@ void color(string file, struct stat name)
 	cout << files << REG;
 }
 
+void total(vector <string> &file, string path)
+{
+	int total=0;
+	for(int i=0; i<file.size(); i++)
+	{
+		struct stat size;
+		string temp=path+'/'+file[i];
+		if(stat(temp.c_str(),&size)==-1)
+		{
+			perror("stat error");
+			exit(1);
+		}
+		total += size.st_blocks/2;
+		cout << "total" << total << endl;
+	}
+}
 
 void lprint(struct stat name)
 {
