@@ -307,6 +307,11 @@ void printlals(string s)
 	}
 }
 
+
+
+
+
+
 void printrls(string s)
 {
 	cout << s << ":" << endl;
@@ -354,6 +359,112 @@ void printrls(string s)
 			
 			
 }
+
+
+void printrals(string s)
+{
+	cout << s << ":" << endl;
+	printals(s);
+	
+
+bool isdir = false;
+	isdir = checkdir(s);
+	if (isdir)
+		return;
+	if (NULL == (directory = opendir(s.c_str())))
+		perror("hi" ) ;
+	while (NULL != (dir = readdir(directory)))
+	{
+		string caa = dir->d_name;
+		if (caa != "." && caa != ".." )
+		{
+			if (not checkdirnoprint(s + "/" + caa)) //if not not dir or if it is a dir
+			{
+				printrals(s + "/" + caa);
+			}
+		}
+	}
+			
+			
+}
+void printralls(string s)
+{
+	cout << s << ":" << endl;
+	printlals(s);
+	
+
+bool isdir = false;
+	isdir = checkdir(s);
+	if (isdir)
+		return;
+	if (NULL == (directory = opendir(s.c_str())))
+		perror("hi" ) ;
+	while (NULL != (dir = readdir(directory)))
+	{
+		string caa = dir->d_name;
+		if (caa != "." && caa != ".." )
+		{
+			if (not checkdirnoprint(s + "/" + caa)) //if not not dir or if it is a dir
+			{
+				printralls(s + "/" + caa);
+			}
+		}
+	}
+			
+			
+}
+
+
+void printrlls(string s)
+{
+	cout << s << ":" << endl;
+	printlls(s);
+	
+
+	/*bool isdir = false;
+	*isdir = checkdir(s);
+	*if (isdir)
+	*	return;
+	*vector<string> fag;
+	*if (NULL == (directory = opendir(s.c_str())))
+	*	perror("hi :)");
+	*errno = 0;
+	*while (NULL != (dir = readdir(directory)))
+	*{
+	*	string caa = dir->d_name;
+	*	if (caa.find(".") != 0)
+	*		fag.push_back(caa);
+	*
+	*}
+    *sort(fag.begin(), fag.end());
+	*printvector(fag);
+	*cout << endl;
+	*
+	*printrls();
+	*/
+	bool isdir = false;
+	isdir = checkdir(s);
+	if (isdir)
+		return;
+	if (NULL == (directory = opendir(s.c_str())))
+		perror("hi" ) ;
+	while (NULL != (dir = readdir(directory)))
+	{
+		string caa = dir->d_name;
+		if (caa.find(".") != 0)
+		{
+			if (not checkdirnoprint(s + "/" + caa)) //if not not dir or if it is a dir
+			{
+				printrlls(s + "/" + caa);
+			}
+		}
+	}
+			
+			
+}
+
+
+
 
 int main(int argc, char* argv[])
 {
@@ -449,8 +560,41 @@ int main(int argc, char* argv[])
 		if (in.size() == 0)
 			printrls(".");
 	}
+	if (a and R and not l)
 
+		{
+		for (int i = 0; i < in.size(); i++)
+		{
+			
+			printrals(in.at(i));
+		}
+		if (in.size() == 0)
+			printrals(".");
+	}
 
+	if (a and R and l)
+
+		{
+		for (int i = 0; i < in.size(); i++)
+		{
+			
+			printralls(in.at(i));
+		}
+		if (in.size() == 0)
+			printralls(".");
+	}
+
+	if (not a and R and l)
+
+		{
+		for (int i = 0; i < in.size(); i++)
+		{
+			
+			printrlls(in.at(i));
+		}
+		if (in.size() == 0)
+			printrlls(".");
+	}
 
 
     return 0;
