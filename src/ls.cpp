@@ -71,17 +71,18 @@ void color(string files, struct stat name)
 }
 
 
-void printvector(vector<string> v)
+void printvector(vector<string> v, string path)
 {
 	for (unsigned int i = 0; i < v.size(); i++)
 	{
-		if (-1 == stat(v.at(i).c_str(), &stats))
-			perror("stat");
+		string tmp = path + "/" + v.at(i);
+		if (-1 == stat(tmp.c_str(), &stats))
+			perror("stat 1");
 		color(v.at(i), stats);
 	}
 }
 
-void checkdir(string s)
+bool checkdir(string s)
 {
 	if (-1 == stat(s.c_str(), &stats))
 	{	
@@ -93,14 +94,32 @@ void checkdir(string s)
 		if ((stats.st_mode & S_IFMT) == S_IFREG)
 		{
 			cout<< s << endl;
-			return;
+			return true;
+		}
+	}
+}
+bool checkdirnoprint(string s)
+{
+	if (-1 == stat(s.c_str(), &stats))
+	{	
+		perror("fuck tyou");
+		exit(1);
+	}
+	else
+	{
+		if ((stats.st_mode & S_IFMT) == S_IFREG)
+		{
+			return true;
 		}
 	}
 }
 
 void printls(string s)
 {
-	checkdir(s);
+	bool isdir = false;
+	isdir = checkdir(s);
+	if (isdir)
+		return;
 	vector<string> fag;
 	if (NULL == (directory = opendir(s.c_str())))
 		perror("hi :)");
@@ -113,14 +132,17 @@ void printls(string s)
 
 	}
     sort(fag.begin(), fag.end());
-	printvector(fag);
+	printvector(fag, s);
 	cout << endl;
 
 }
 
 void printals(string s)
 {
-	checkdir(s);
+	bool isdir = false;
+	isdir = checkdir(s);
+	if (isdir)
+		return;
 	vector<string> fag;
 	if (NULL == (directory = opendir(s.c_str())))
 		perror("hi :)");
@@ -132,7 +154,7 @@ void printals(string s)
 
 	}
     sort(fag.begin(), fag.end());
-	printvector(fag);
+	printvector(fag, s);
 	cout << endl;
 }
 
@@ -156,12 +178,13 @@ void total(vector <string> &file, string path)
 
 void lprint(struct stat name)
 {
+	string s;
     if(S_ISDIR(name.st_mode))
-        cout << 'd';
+        s += 'd';
     else
     {
         if(S_ISLNK(name.st_mode))
-            cout << 'l';
+            s += 'l';
         else
             cout << '-';
     }
@@ -230,6 +253,108 @@ void lprint(struct stat name)
 	
 }
 
+void printlls(string s)
+{
+	bool isdir = false;
+	isdir = checkdir(s);
+	if (isdir)
+		return;
+	vector<string> fag;
+	if (NULL == (directory = opendir(s.c_str())))
+		perror("hi :)");
+	errno = 0;
+	while (NULL != (dir = readdir(directory)))
+	{
+		if (-1 == stat(dir->d_name, &stats))
+		{	
+			perror("fuck tyou");
+			exit(1);
+		}
+		string tmp = dir->d_name;
+		if (tmp.find(".") != 0)
+		{
+			lprint(stats);
+			cout << " ";
+			color(dir->d_name, stats);
+			cout << endl;
+		}
+	}
+
+
+}
+
+void printlals(string s)
+{
+	bool isdir = false;
+	isdir = checkdir(s);
+	if (isdir)
+		return;
+	vector<string> fag;
+	if (NULL == (directory = opendir(s.c_str())))
+		perror("hi :)");
+	errno = 0;
+	while (NULL != (dir = readdir(directory)))
+	{
+		if (-1 == stat(dir->d_name, &stats))
+		{	
+			perror("fuck tyou");
+			exit(1);
+		}
+		lprint(stats);
+		cout << " ";
+		color(dir->d_name, stats);
+		cout << endl;
+	}
+}
+
+void printrls(string s)
+{
+	cout << s << ":" << endl;
+	printls(s);
+	
+
+	/*bool isdir = false;
+	*isdir = checkdir(s);
+	*if (isdir)
+	*	return;
+	*vector<string> fag;
+	*if (NULL == (directory = opendir(s.c_str())))
+	*	perror("hi :)");
+	*errno = 0;
+	*while (NULL != (dir = readdir(directory)))
+	*{
+	*	string caa = dir->d_name;
+	*	if (caa.find(".") != 0)
+	*		fag.push_back(caa);
+	*
+	*}
+    *sort(fag.begin(), fag.end());
+	*printvector(fag);
+	*cout << endl;
+	*
+	*printrls();
+	*/
+	bool isdir = false;
+	isdir = checkdir(s);
+	if (isdir)
+		return;
+	if (NULL == (directory = opendir(s.c_str())))
+		perror("hi" ) ;
+	while (NULL != (dir = readdir(directory)))
+	{
+		string caa = dir->d_name;
+		if (caa.find(".") != 0)
+		{
+			if (not checkdirnoprint(s + "/" + caa)) //if not not dir or if it is a dir
+			{
+				printrls(s + "/" + caa);
+			}
+		}
+	}
+			
+			
+}
+
 int main(int argc, char* argv[])
 {
     bool checkflag=true;//checks for flags and files
@@ -248,11 +373,11 @@ int main(int argc, char* argv[])
                         R=true;
                     else if(argv[i][j]=='l')
                         l=true;
-                    else if(argv[i][j]='a')
+                    else if(argv[i][j]=='a')
                         a=true;
                     else
                     {
-                        cerr << "Invalid flag!" << argv[i][j] << endl;
+                        cerr << "Invalid flag! nigga " << argv[i][j] << endl;
                         exit(1);
                     }
                 }
@@ -278,7 +403,6 @@ int main(int argc, char* argv[])
 	{
 		for (int i = 0; i < in.size(); i++)
 		{
-			cout << in.at(i);
 			printls(in.at(i));
 		}
 		if (in.size() == 0)
@@ -288,12 +412,46 @@ int main(int argc, char* argv[])
 	{
 		for (int i = 0; i < in.size(); i++)
 		{
-			cout << in.at(i);
 			printals(in.at(i));
 		}
 		if (in.size() == 0)
 			printals(".");
 	}
+	if (!a and !R and l)
+	{
+		sort(in.begin(), in.end());
+		for (int i = 0; i < in.size(); i++)
+		{
+			
+			printlls(in.at(i));
+		}
+		if (in.size() == 0)
+			printlls(".");
+	}
+	if (a and !R and l)
+	{
+		sort(in.begin(), in.end());
+		for (int i = 0; i < in.size(); i++)
+		{
+			
+			printlals(in.at(i));
+		}
+		if (in.size() == 0)
+			printlals(".");
+	}
+	if (not a and R and not l)
+	{
+		for (int i = 0; i < in.size(); i++)
+		{
+			
+			printrls(in.at(i));
+		}
+		if (in.size() == 0)
+			printrls(".");
+	}
+
+
+
 
     return 0;
 }
