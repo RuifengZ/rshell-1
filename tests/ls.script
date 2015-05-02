@@ -1,0 +1,648 @@
+Script started on Fri 01 May 2015 05:10:25 PM PDT
+~
+kchan049@hammer $ ls
+assn3.asm  assn4.asm  assn5.asm  assn6.asm  [0m[38;5;27mDesktop[0m/  [38;5;27mDownloads[0m/
+[m~
+kchan049@hammer $ cd Desktop/cs100/rshell/
+~/Desktop/cs100/rshell
+kchan049@hammer $ ls
+LICENSE  Makefile  README.md  [0m[38;5;27msrc[0m/  [38;5;27mtests[0m/
+[m~/Desktop/cs100/rshell
+kchan049@hammer $ make ls
+mkdir -p ./bin
+g++ -Wall -Werror -pedantic -ansi ./src/ls.cpp -o ./bin/ls
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls
+LICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a
+[47m[34m.  [0m[47m[34m..  [0m[47m[34m.git  [0mLICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a[Kl
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 24
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -l[KR
+.:
+LICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+./src:
+exec.cpp[0m  ls.cpp[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -R[Kal
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 9 kchan049 csmajs  4096 Apr 27 14: 16  [47m[34m..  [0m
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.git  [0m
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 36
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -al[K -l
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 9 kchan049 csmajs  4096 Apr 27 14: 16  [47m[34m..  [0m
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.git  [0m
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 36
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a -l[K[K[KR
+.:
+[47m[34m.  [0m[47m[34m..  [0m[47m[34m.git  [0mLICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+./.git:
+#MERGE_MSG#[0m  [47m[34m.  [0m[47m[34m..  [0mCOMMIT_EDITMSG[0m  FETCH_HEAD[0m  HEAD[0m  ORIG_HEAD[0m  TAG_EDITMSG~[0m  [34mbranches  [0mconfig[0m  description[0m  [34mhooks  [0mindex[0m  [34minfo  [0m[34mlogs  [0m[34mobjects  [0mpacked-refs[0m  [34mrefs  [0m
+./.git/refs:
+[47m[34m.  [0m[47m[34m..  [0m[34mheads  [0m[34mremotes  [0m[34mtags  [0m
+./.git/refs/heads:
+[47m[34m.  [0m[47m[34m..  [0mexe[0m  exec[0m  ls[0m  master[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -aR[K -R
+.:
+[47m[34m.  [0m[47m[34m..  [0m[47m[34m.git  [0mLICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+./.git:
+#MERGE_MSG#[0m  [47m[34m.  [0m[47m[34m..  [0mCOMMIT_EDITMSG[0m  FETCH_HEAD[0m  HEAD[0m  ORIG_HEAD[0m  TAG_EDITMSG~[0m  [34mbranches  [0mconfig[0m  description[0m  [34mhooks  [0mindex[0m  [34minfo  [0m[34mlogs  [0m[34mobjects  [0mpacked-refs[0m  [34mrefs  [0m
+./.git/refs:
+[47m[34m.  [0m[47m[34m..  [0m[34mheads  [0m[34mremotes  [0m[34mtags  [0m
+./.git/refs/heads:
+[47m[34m.  [0m[47m[34m..  [0mexe[0m  exec[0m  ls[0m  master[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a -R[K[K[K[KRa
+.:
+[47m[34m.  [0m[47m[34m..  [0m[47m[34m.git  [0mLICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+./.git:
+#MERGE_MSG#[0m  [47m[34m.  [0m[47m[34m..  [0mCOMMIT_EDITMSG[0m  FETCH_HEAD[0m  HEAD[0m  ORIG_HEAD[0m  TAG_EDITMSG~[0m  [34mbranches  [0mconfig[0m  description[0m  [34mhooks  [0mindex[0m  [34minfo  [0m[34mlogs  [0m[34mobjects  [0mpacked-refs[0m  [34mrefs  [0m
+./.git/refs:
+[47m[34m.  [0m[47m[34m..  [0m[34mheads  [0m[34mremotes  [0m[34mtags  [0m
+./.git/refs/heads:
+[47m[34m.  [0m[47m[34m..  [0mexe[0m  exec[0m  ls[0m  master[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -Ra[Kl
+.:
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 24
+./src:
+-rw------- 1 kchan049 csmajs  6612 Apr 30 09: 43  exec.cpp[0m  
+-rw------- 1 kchan049 csmajs 11197 May 01 17: 01  ls.cpp[0m  
+Total 20
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -Rl[K[KlR
+.:
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 24
+./src:
+-rw------- 1 kchan049 csmajs  6612 Apr 30 09: 43  exec.cpp[0m  
+-rw------- 1 kchan049 csmajs 11197 May 01 17: 01  ls.cpp[0m  
+Total 20
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -lR[K[KaRl
+.:
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 9 kchan049 csmajs  4096 Apr 27 14: 16  [47m[34m..  [0m
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.git  [0m
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 36
+./.git:
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [34mrefs  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34mbranches  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34minfo  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34mhooks  [0m
+-rw------- 1 kchan049 csmajs    73 Apr 08 14: 04  description[0m  
+drwx------ 109 kchan049 csmajs  4096 May 01 16: 42  [34mobjects  [0m
+-rw------- 1 kchan049 csmajs    19 May 01 17: 01  HEAD[0m  
+-rw------- 1 kchan049 csmajs   258 Apr 16 13: 02  config[0m  
+drwx------ 3 kchan049 csmajs  4096 Apr 08 14: 04  [34mlogs  [0m
+-rw------- 1 kchan049 csmajs   107 Apr 08 14: 04  packed-refs[0m  
+-rw------- 1 kchan049 csmajs    30 May 01 16: 42  COMMIT_EDITMSG[0m  
+-rw------- 1 kchan049 csmajs   488 May 01 17: 01  index[0m  
+-rw------- 1 kchan049 csmajs    91 Apr 30 20: 28  FETCH_HEAD[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 30 20: 28  ORIG_HEAD[0m  
+-rw------- 1 kchan049 csmajs   286 Apr 17 20: 00  #MERGE_MSG#[0m  
+-rw------- 1 kchan049 csmajs    68 Apr 17 20: 25  TAG_EDITMSG~[0m  
+Total 60
+./.git/refs:
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [47m[34m.  [0m
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m..  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 16: 42  [34mheads  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 30 09: 53  [34mtags  [0m
+drwx------ 3 kchan049 csmajs  4096 Apr 08 14: 04  [34mremotes  [0m
+Total 20
+./.git/refs/heads:
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+drwx------ 2 kchan049 csmajs  4096 May 01 16: 42  [47m[34m.  [0m
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs    41 Apr 30 09: 49  master[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 17 19: 34  exec[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 17 19: 56  exe[0m  
+-rw------- 1 kchan049 csmajs    41 May 01 16: 42  ls[0m  
+Total 8
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin [K/ls -a -R -l
+.:
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 9 kchan049 csmajs  4096 Apr 27 14: 16  [47m[34m..  [0m
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.git  [0m
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 36
+./.git:
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [34mrefs  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34mbranches  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34minfo  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34mhooks  [0m
+-rw------- 1 kchan049 csmajs    73 Apr 08 14: 04  description[0m  
+drwx------ 109 kchan049 csmajs  4096 May 01 16: 42  [34mobjects  [0m
+-rw------- 1 kchan049 csmajs    19 May 01 17: 01  HEAD[0m  
+-rw------- 1 kchan049 csmajs   258 Apr 16 13: 02  config[0m  
+drwx------ 3 kchan049 csmajs  4096 Apr 08 14: 04  [34mlogs  [0m
+-rw------- 1 kchan049 csmajs   107 Apr 08 14: 04  packed-refs[0m  
+-rw------- 1 kchan049 csmajs    30 May 01 16: 42  COMMIT_EDITMSG[0m  
+-rw------- 1 kchan049 csmajs   488 May 01 17: 01  index[0m  
+-rw------- 1 kchan049 csmajs    91 Apr 30 20: 28  FETCH_HEAD[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 30 20: 28  ORIG_HEAD[0m  
+-rw------- 1 kchan049 csmajs   286 Apr 17 20: 00  #MERGE_MSG#[0m  
+-rw------- 1 kchan049 csmajs    68 Apr 17 20: 25  TAG_EDITMSG~[0m  
+Total 60
+./.git/refs:
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [47m[34m.  [0m
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m..  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 16: 42  [34mheads  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 30 09: 53  [34mtags  [0m
+drwx------ 3 kchan049 csmajs  4096 Apr 08 14: 04  [34mremotes  [0m
+Total 20
+./.git/refs/heads:
+drwx------ 2 kchan049 csmajs  4096 May 01 16: 42  [47m[34m.  [0m
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs    41 Apr 30 09: 49  master[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 17 19: 34  exec[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 17 19: 56  exe[0m  
+-rw------- 1 kchan049 csmajs    41 May 01 16: 42  ls[0m  
+Total 8
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a -R -l[K[K[K[K[K[K[Kl -R
+.:
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 24
+./src:
+-rw------- 1 kchan049 csmajs  6612 Apr 30 09: 43  exec.cpp[0m  
+-rw------- 1 kchan049 csmajs 11197 May 01 17: 01  ls.cpp[0m  
+Total 20
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -[K-R l
+l:
+stat: No such file or directory
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -R l[K[K[KlR
+.:
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 24
+./src:
+-rw------- 1 kchan049 csmajs  6612 Apr 30 09: 43  exec.cpp[0m  
+-rw------- 1 kchan049 csmajs 11197 May 01 17: 01  ls.cpp[0m  
+Total 20
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -lR[K[KRl
+.:
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 24
+./src:
+-rw------- 1 kchan049 csmajs  6612 Apr 30 09: 43  exec.cpp[0m  
+-rw------- 1 kchan049 csmajs 11197 May 01 17: 01  ls.cpp[0m  
+Total 20
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -Rl[K[Kc
+Invalid flag!  c
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -fet
+Invalid flag!  f
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a -a -a -a -a -a -a -a
+[47m[34m.  [0m[47m[34m..  [0m[47m[34m.git  [0mLICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+[47m[34m.  [0m[47m[34m..  [0m[47m[34m.git  [0mLICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -wjieofja
+Invalid flag!  w
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -alRaaaaallllllRRRRRRlllllllaaaaa
+.:
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 9 kchan049 csmajs  4096 Apr 27 14: 16  [47m[34m..  [0m
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.git  [0m
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 36
+./.git:
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [34mrefs  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34mbranches  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34minfo  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34mhooks  [0m
+-rw------- 1 kchan049 csmajs    73 Apr 08 14: 04  description[0m  
+drwx------ 109 kchan049 csmajs  4096 May 01 16: 42  [34mobjects  [0m
+-rw------- 1 kchan049 csmajs    19 May 01 17: 01  HEAD[0m  
+-rw------- 1 kchan049 csmajs   258 Apr 16 13: 02  config[0m  
+drwx------ 3 kchan049 csmajs  4096 Apr 08 14: 04  [34mlogs  [0m
+-rw------- 1 kchan049 csmajs   107 Apr 08 14: 04  packed-refs[0m  
+-rw------- 1 kchan049 csmajs    30 May 01 16: 42  COMMIT_EDITMSG[0m  
+-rw------- 1 kchan049 csmajs   488 May 01 17: 01  index[0m  
+-rw------- 1 kchan049 csmajs    91 Apr 30 20: 28  FETCH_HEAD[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 30 20: 28  ORIG_HEAD[0m  
+-rw------- 1 kchan049 csmajs   286 Apr 17 20: 00  #MERGE_MSG#[0m  
+-rw------- 1 kchan049 csmajs    68 Apr 17 20: 25  TAG_EDITMSG~[0m  
+Total 60
+./.git/refs:
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [47m[34m.  [0m
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m..  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 16: 42  [34mheads  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 30 09: 53  [34mtags  [0m
+drwx------ 3 kchan049 csmajs  4096 Apr 08 14: 04  [34mremotes  [0m
+Total 20
+./.git/refs/heads:
+drwx------ 2 kchan049 csmajs  4096 May 01 16: 42  [47m[34m.  [0m
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs    41 Apr 30 09: 49  master[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 17 19: 34  exec[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 17 19: 56  exe[0m  
+-rw------- 1 kchan049 csmajs    41 May 01 16: 42  ls[0m  
+Total 8
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -f -q -e -p -p -p -p -p
+Invalid flag!  f
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls - p
+stat: No such file or directory
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls      -a       -l
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 9 kchan049 csmajs  4096 Apr 27 14: 16  [47m[34m..  [0m
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.git  [0m
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 36
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls      -a     -l    tests
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs 13145 Apr 17 22: 19  exec.script[0m  
+-rw------- 1 kchan049 csmajs     0 May 01 17: 04  ls.script[0m  
+Total 24
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -[K       -aaaaaaaaa .     ..
+[47m[34m.  [0m[47m[34m..  [0m[47m[34m.git  [0mLICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+[47m[34m.  [0m[47m[34m..  [0m[47m[34m.git  [0mkenta.cpp[0m  [34mlab1  [0m[34mlab2  [0m[34mlab3  [0m[34mlab4  [0m[34mrshell  [0m[34mucr-cs100  [0m
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls
+LICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls tests
+exec.script[0m  ls.script[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a tests
+[47m[34m.  [0m[47m[34m..  [0mexec.script[0m  ls.script[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls /src
+stat: No such file or directory
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls bin
+[32mls  [0m
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls src
+exec.cpp[0m  ls.cpp[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls .
+LICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+~/Desktop/cs100/rshell
+kchan049@hammer $ binl[K/ls ..
+kenta.cpp[0m  [34mlab1  [0m[34mlab2  [0m[34mlab3  [0m[34mlab4  [0m[34mrshell  [0m[34mucr-cs100  [0m
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a tests
+[47m[34m.  [0m[47m[34m..  [0mexec.script[0m  ls.script[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a -l tests
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs 13145 Apr 17 22: 19  exec.script[0m  
+-rw------- 1 kchan049 csmajs     0 May 01 17: 04  ls.script[0m  
+Total 24
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -al tests
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs 13145 Apr 17 22: 19  exec.script[0m  
+-rw------- 1 kchan049 csmajs     0 May 01 17: 04  ls.script[0m  
+Total 24
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -aaaaaaaaaaaaa tests
+[47m[34m.  [0m[47m[34m..  [0mexec.script[0m  ls.script[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls test/a
+stat: No such file or directory
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls tests/
+exec.script[0m  ls.script[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -Rla tests
+tests:
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs 13145 Apr 17 22: 19  exec.script[0m  
+-rw------- 1 kchan049 csmajs     0 May 01 17: 04  ls.script[0m  
+Total 24
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/s[Kls -R -l -a tests
+tests:
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs 13145 Apr 17 22: 19  exec.script[0m  
+-rw------- 1 kchan049 csmajs     0 May 01 17: 04  ls.script[0m  
+Total 24
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/s[Kls -Rrrllllllllllllaaaaaaaaaaa tests
+Invalid flag!  r
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a tests
+[47m[34m.  [0m[47m[34m..  [0mexec.script[0m  ls.script[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls tests -a
+[47m[34m.  [0m[47m[34m..  [0mexec.script[0m  ls.script[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls tests -a -a - l -l
+stat: No such file or directory
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls tests src
+exec.cpp[0m  ls.cpp[0m  
+exec.script[0m  ls.script[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls tests src . .. bin
+LICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+kenta.cpp[0m  [34mlab1  [0m[34mlab2  [0m[34mlab3  [0m[34mlab4  [0m[34mrshell  [0m[34mucr-cs100  [0m
+[32mls  [0m
+exec.cpp[0m  ls.cpp[0m  
+exec.script[0m  ls.script[0m  
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls testsssss
+stat: No such file or directory
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls dad mom dad
+stat: No such file or directory
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls jwiefo wejfio weifoj
+stat: No such file or directory
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a .git . ..
+[47m[34m.  [0m[47m[34m..  [0m[47m[34m.git  [0mLICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+[47m[34m.  [0m[47m[34m..  [0m[47m[34m.git  [0mkenta.cpp[0m  [34mlab1  [0m[34mlab2  [0m[34mlab3  [0m[34mlab4  [0m[34mrshell  [0m[34mucr-cs100  [0m
+#MERGE_MSG#[0m  [47m[34m.  [0m[47m[34m..  [0mCOMMIT_EDITMSG[0m  FETCH_HEAD[0m  HEAD[0m  ORIG_HEAD[0m  TAG_EDITMSG~[0m  [34mbranches  [0mconfig[0m  description[0m  [34mhooks  [0mindex[0m  [34minfo  [0m[34mlogs  [0m[34mobjects  [0mpacked-refs[0m  [34mrefs  [0m
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a [K[K[K[K LICENSE
+LICENSE
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/l[K[K/l[K[K[K[K[Kbin/ls -a -l tests src bin .
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 9 kchan049 csmajs  4096 Apr 27 14: 16  [47m[34m..  [0m
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.git  [0m
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 36
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+-rwx------ 1 kchan049 csmajs 55608 May 01 17: 04  [32mls  [0m
+Total 64
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs  6612 Apr 30 09: 43  exec.cpp[0m  
+-rw------- 1 kchan049 csmajs 11197 May 01 17: 01  ls.cpp[0m  
+Total 28
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs 13145 Apr 17 22: 19  exec.script[0m  
+-rw------- 1 kchan049 csmajs     0 May 01 17: 04  ls.script[0m  
+Total 24
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/ls -a -l -R tests src bin
+bin:
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+-rwx------ 1 kchan049 csmajs 55608 May 01 17: 04  [32mls  [0m
+Total 64
+src:
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs  6612 Apr 30 09: 43  exec.cpp[0m  
+-rw------- 1 kchan049 csmajs 11197 May 01 17: 01  ls.cpp[0m  
+Total 28
+tests:
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs 13145 Apr 17 22: 19  exec.script[0m  
+-rw------- 1 kchan049 csmajs     0 May 01 17: 04  ls.script[0m  
+Total 24
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin [K/ls -aaaaaaaaaallllll tests src .
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+Failed to get grgid: Success
+drwx------ 6 ~/Desktop/cs100/rshell
+kchan049@hammer $ valgrind bin/ls
+==19948== Memcheck, a memory error detector
+==19948== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==19948== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==19948== Command: bin/ls
+==19948== 
+LICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+==19948== 
+==19948== HEAP SUMMARY:
+==19948==     in use at exit: 32,816 bytes in 1 blocks
+==19948==   total heap usage: 28 allocs, 27 frees, 33,636 bytes allocated
+==19948== 
+==19948== LEAK SUMMARY:
+==19948==    definitely lost: 0 bytes in 0 blocks
+==19948==    indirectly lost: 0 bytes in 0 blocks
+==19948==      possibly lost: 0 bytes in 0 blocks
+==19948==    still reachable: 32,816 bytes in 1 blocks
+==19948==         suppressed: 0 bytes in 0 blocks
+==19948== Rerun with --leak-check=full to see details of leaked memory
+==19948== 
+==19948== For counts of detected and suppressed errors, rerun with: -v
+==19948== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 6 from 6)
+~/Desktop/cs100/rshell
+kchan049@hammer $ valgrind bin/ls -a
+==19974== Memcheck, a memory error detector
+==19974== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==19974== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==19974== Command: bin/ls -a
+==19974== 
+[47m[34m.  [0m[47m[34m..  [0m[47m[34m.git  [0mLICENSE[0m  Makefile[0m  README.md[0m  [34mbin  [0m[34msrc  [0m[34mtests  [0m
+==19974== 
+==19974== HEAP SUMMARY:
+==19974==     in use at exit: 32,816 bytes in 1 blocks
+==19974==   total heap usage: 35 allocs, 34 frees, 33,958 bytes allocated
+==19974== 
+==19974== LEAK SUMMARY:
+==19974==    definitely lost: 0 bytes in 0 blocks
+==19974==    indirectly lost: 0 bytes in 0 blocks
+==19974==      possibly lost: 0 bytes in 0 blocks
+==19974==    still reachable: 32,816 bytes in 1 blocks
+==19974==         suppressed: 0 bytes in 0 blocks
+==19974== Rerun with --leak-check=full to see details of leaked memory
+==19974== 
+==19974== For counts of detected and suppressed errors, rerun with: -v
+==19974== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 6 from 6)
+~/Desktop/cs100/rshell
+kchan049@hammer $ valgrind bin/ls -a -l -R
+==20007== Memcheck, a memory error detector
+==20007== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==20007== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==20007== Command: bin/ls -a -l -R
+==20007== 
+.:
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m.  [0m
+drwx------ 9 kchan049 csmajs  4096 Apr 27 14: 16  [47m[34m..  [0m
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.git  [0m
+-rw------- 1 kchan049 csmajs  1076 Apr 08 14: 04  LICENSE[0m  
+-rw------- 1 kchan049 csmajs  2125 May 01 17: 01  README.md[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 01  [34msrc  [0m
+-rw------- 1 kchan049 csmajs   280 May 01 17: 01  Makefile[0m  
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mtests  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 17: 04  [34mbin  [0m
+Total 36
+./.git:
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m.  [0m
+drwx------ 6 kchan049 csmajs  4096 May 01 17: 04  [47m[34m..  [0m
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [34mrefs  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34mbranches  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34minfo  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 08 14: 04  [34mhooks  [0m
+-rw------- 1 kchan049 csmajs    73 Apr 08 14: 04  description[0m  
+drwx------ 109 kchan049 csmajs  4096 May 01 16: 42  [34mobjects  [0m
+-rw------- 1 kchan049 csmajs    19 May 01 17: 01  HEAD[0m  
+-rw------- 1 kchan049 csmajs   258 Apr 16 13: 02  config[0m  
+drwx------ 3 kchan049 csmajs  4096 Apr 08 14: 04  [34mlogs  [0m
+-rw------- 1 kchan049 csmajs   107 Apr 08 14: 04  packed-refs[0m  
+-rw------- 1 kchan049 csmajs    30 May 01 16: 42  COMMIT_EDITMSG[0m  
+-rw------- 1 kchan049 csmajs   488 May 01 17: 01  index[0m  
+-rw------- 1 kchan049 csmajs    91 Apr 30 20: 28  FETCH_HEAD[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 30 20: 28  ORIG_HEAD[0m  
+-rw------- 1 kchan049 csmajs   286 Apr 17 20: 00  #MERGE_MSG#[0m  
+-rw------- 1 kchan049 csmajs    68 Apr 17 20: 25  TAG_EDITMSG~[0m  
+Total 60
+./.git/refs:
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [47m[34m.  [0m
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+drwx------ 8 kchan049 csmajs  4096 May 01 17: 01  [47m[34m..  [0m
+drwx------ 2 kchan049 csmajs  4096 May 01 16: 42  [34mheads  [0m
+drwx------ 2 kchan049 csmajs  4096 Apr 30 09: 53  [34mtags  [0m
+drwx------ 3 kchan049 csmajs  4096 Apr 08 14: 04  [34mremotes  [0m
+Total 20
+./.git/refs/heads:
+drwx------ 2 kchan049 csmajs  4096 May 01 16: 42  [47m[34m.  [0m
+drwx------ 5 kchan049 csmajs  4096 Apr 08 14: 04  [47m[34m..  [0m
+-rw------- 1 kchan049 csmajs    41 Apr 30 09: 49  master[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 17 19: 34  exec[0m  
+-rw------- 1 kchan049 csmajs    41 Apr 17 19: 56  exe[0m  
+-rw------- 1 kchan049 csmajs    41 May 01 16: 42  ls[0m  
+Total 8
+==20007== Invalid free() / delete / delete[] / realloc()
+==20007==    at 0x4A06430: free (vg_replace_malloc.c:446)
+==20007==    by 0x3268141365: __rpc_thread_destroy (in /lib64/libc-2.12.so)
+==20007==    by 0x3268140BB1: __libc_freeres (in /lib64/libc-2.12.so)
+==20007==    by 0x480166D: _vgnU_freeres (vg_preloaded.c:62)
+==20007==    by 0x3268035AD1: exit (in /lib64/libc-2.12.so)
+==20007==    by 0x326801ED63: (below main) (in /lib64/libc-2.12.so)
+==20007==  Address 0x4d66e50 is 0 bytes inside a block of size 76 free'd
+==20007==    at 0x4A06430: free (vg_replace_malloc.c:446)
+==20007==    by 0x3268140BB1: __libc_freeres (in /lib64/libc-2.12.so)
+==20007==    by 0x480166D: _vgnU_freeres (vg_preloaded.c:62)
+==20007==    by 0x3268035AD1: exit (in /lib64/libc-2.12.so)
+==20007==    by 0x326801ED63: (below main) (in /lib64/libc-2.12.so)
+==20007== 
+==20007== 
+==20007== HEAP SUMMARY:
+==20007==     in use at exit: 262,528 bytes in 8 blocks
+==20007==   total heap usage: 708 allocs, 701 frees, 1,717,575 bytes allocated
+==20007== 
+==20007== LEAK SUMMARY:
+==20007==    definitely lost: 229,712 bytes in 7 blocks
+==20007==    indirectly lost: 0 bytes in 0 blocks
+==20007==      possibly lost: 0 bytes in 0 blocks
+==20007==    still reachable: 32,816 bytes in 1 blocks
+==20007==         suppressed: 0 bytes in 0 blocks
+==20007== Rerun with --leak-check=full to see details of leaked memory
+==20007== 
+==20007== For counts of detected and suppressed errors, rerun with: -v
+==20007== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 6 from 6)
+~/Desktop/cs100/rshell
+kchan049@hammer $ ^C
+~/Desktop/cs100/rshell
+kchan049@hammer $ exit
+exit
+
+Script done on Fri 01 May 2015 05:22:45 PM PDT
