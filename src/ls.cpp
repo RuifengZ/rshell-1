@@ -16,7 +16,7 @@
 #include <errno.h>
 #include <dirent.h>
 #include <vector>
-
+#include <stack>
 
 using namespace std;
 
@@ -86,7 +86,6 @@ void printvector(vector<string> v, string path)
 		if (-1 == stat(tmp.c_str(), &stats))
 		{
 			perror("stat 1");
-			exit(1);
 		}
 		color(v.at(i), stats);
 	}
@@ -97,7 +96,6 @@ bool checkdir(string s)
 	if (-1 == stat(s.c_str(), &stats))
 	{	
 		perror("stat");
-		exit(1);
 	}
 	else
 	{
@@ -115,7 +113,6 @@ bool checkdirnoprint(string s)
 	if (-1 == stat(s.c_str(), &stats))
 	{	
 		perror("stat");
-		exit(1);
 	}
 	else
 	{
@@ -138,7 +135,6 @@ void printls(string s)
 	if (NULL == (directory = opendir(s.c_str())))
 	{
 		perror("opendir :)");
-		exit(1);
 	}
 	errno = 0;
 	while (NULL != (dir = readdir(directory)))
@@ -146,13 +142,9 @@ void printls(string s)
 		string caa = dir->d_name;
 		if (caa.find(".") != 0)
 			fag.push_back(caa);
-
+		if(errno==-1)
+			perror("readdir");
 	}
-	if(errno==-1)
-	{
-		perror("while readdir");
-		exit(1);
-    }
 	sort(fag.begin(), fag.end());
 	printvector(fag, s);
 	cout << endl;
@@ -169,19 +161,14 @@ void printals(string s)
 	if (NULL == (directory = opendir(s.c_str())))
 	{
 		perror("hi :)");
-		exit(1);
 	}
 	errno = 0;
 	while (NULL != (dir = readdir(directory)))
 	{
 		string caa = dir->d_name;
 		fag.push_back(caa);
-
-	}
-    if(errno==-1)
-	{
-		perror("while readdir");
-		exit(1);
+		if(errno==-1)
+			perror("readdir");
 	}
 	sort(fag.begin(), fag.end());
 	printvector(fag, s);
@@ -299,11 +286,8 @@ void printlls(string s)
 			color(tmp,stats);
 			cout << endl;
 		}
-	}
-	if(errno==-1)
-	{
-		perror("while readdir");
-		exit(1);
+		if(errno==-1)
+			perror("readdir");
 	}
 	cout << "Total " << totalblocks/2 << endl;
 
@@ -320,7 +304,6 @@ void printlals(string s)
 	if (NULL == (directory = opendir(s.c_str())))
 	{
 		perror("hi :)");
-		exit(1);
 	}
 	errno = 0;
 	int total=0;
@@ -332,18 +315,14 @@ void printlals(string s)
 		if (-1 == stat(tmp.c_str(), &stats))
 		{	
 			perror("stat");
-			exit(1);
 		}
 		lprint(stats);
 		cout << " ";
 		color(dir->d_name, stats);
 		cout << endl;
 		total=total+stats.st_blocks;
-	}
-	if(errno==-1)
-	{
-		perror("while readdir");
-		exit(1);
+		if(errno==-1)
+			perror("readdir");
 	}
 	cout << "Total " << total/2 << endl;
 }
@@ -357,34 +336,22 @@ void printrls(string s)
 {
 	cout << s << ":" << endl;
 	printls(s);
-	
-
 	bool isdir = false;
-	isdir = checkdir(s);
-	if (isdir)
+	isdir=checkdir(s);
+	if(isdir)
 		return;
-	if (NULL == (directory = opendir(s.c_str())))
-	{
-		perror("hi" ) ;
-		exit(1);
-	}
+	if(NULL==(directory=opendir(s.c_str())))
+		perror("hi");
 	errno=0;
-	while (NULL != (dir = readdir(directory)))
+	while(NULL!=(dir=readdir(directory)))
 	{
-		string caa = dir->d_name;
-		if (caa.find(".") != 0)
-		{
-			if (not checkdirnoprint(s + "/" + caa)) //if not not dir or if it is a dir
-			{
-				printrls(s + "/" + caa);
-			}
-		}
+		string caa=dir->d_name;
+		if(caa.find(".")!=0)
+			if(!checkdirnoprint(s+"/"+caa))
+				printrls(s+"/"+caa);		
 	}
 	if(errno==-1)
-	{
 		perror("while readdir");
-		exit(1);
-	}
 			
 }
 
@@ -402,7 +369,6 @@ bool isdir = false;
 	if (NULL == (directory = opendir(s.c_str())))
 	{
 		perror("hi" ) ;
-		exit(1);
 	}
 	errno=0;
 	while (NULL != (dir = readdir(directory)))
@@ -415,11 +381,8 @@ bool isdir = false;
 				printrals(s + "/" + caa);
 			}
 		}
-	}
-	if(errno==-1)
-	{
-		perror("while readdir");
-		exit(1);
+		if(errno==-1)
+			perror("readdir");
 	}
 			
 }
@@ -436,9 +399,9 @@ bool isdir = false;
 	if (NULL == (directory = opendir(s.c_str())))
 	{
 		perror("hi" ) ;
-		exit(1);
 	}
 	int total=0;
+	errno=0;
 	while (NULL != (dir = readdir(directory)))
 	{
 		string caa = dir->d_name;
@@ -450,7 +413,8 @@ bool isdir = false;
 			}
 		}
 		total=total+stats.st_blocks;
-
+		if(errno==-1)
+			perror("readdir");
 	}
 }
 
@@ -489,7 +453,6 @@ void printrlls(string s)
 	if (NULL == (directory = opendir(s.c_str())))
 	{
 		perror("hi" ) ;
-		exit(1);
 	}
 	errno=0;
 	while (NULL != (dir = readdir(directory)))
@@ -502,11 +465,8 @@ void printrlls(string s)
 				printrlls(s + "/" + caa);
 			}
 		}
-	}
-	if(errno==-1)
-	{
-		perror("readdir while");
-		exit(1);
+		if(errno==-1)
+			perror("readdir");
 	}
 }
 
