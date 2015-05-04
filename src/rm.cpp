@@ -47,6 +47,8 @@ int main(int argc, char** argv) {
 
 int removedir(const char* path) {
 
+	std::cout << "DEBUG: opening " << path << std::endl;
+
     // check if is file; if so, remove immediately
     std::vector<std::string> dirfiles;
     int scan_status = scandir(path, dirfiles);
@@ -61,6 +63,8 @@ int removedir(const char* path) {
     // iterate over all found files
     for(auto f : dirfiles) {
 
+		std::cout << "DEBUG: found file " << f << std::endl;
+
         struct stat filestat;
         std::string fullpath = std::string(path) + "/" + f;
         const char* fullpath_cstr = fullpath.c_str();
@@ -71,13 +75,13 @@ int removedir(const char* path) {
         filename = filename.substr(filename.find_last_of("/\\") + 1);
 
         if(RM_DIRS && S_ISDIR(filestat.st_mode)) {
-            if(filename != "." && filename != "..")
-                return removedir(fullpath_cstr);
-            else continue;
-        }
-
-        if(unlink(fullpath.c_str()) != 0) { perror("unlink: file within directory"); return 1; }
+            if(filename != "." && filename != "..") {
+                if(removedir(fullpath_cstr) != 0) return 1;
+            } else continue;
+        } else if(unlink(fullpath.c_str()) != 0) { perror("unlink: file within directory"); return 1; }
     }
+	
+	std::cout << "DEBUG: deleting " << path << std::endl;
 
     // tail recursion; delete current dir
     if(rmdir(path) != 0) { perror("rmdir: removing current directory"); return 1; }
