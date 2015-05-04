@@ -71,14 +71,12 @@ int removedir(const char* path) {
         filename = filename.substr(filename.find_last_of("/\\") + 1);
 
         if(RM_DIRS && S_ISDIR(filestat.st_mode)) {
-            if(filename != "." && filename != "..")
-                return removedir(fullpath_cstr);
-            else continue;
-        }
-
-        if(unlink(fullpath.c_str()) != 0) { perror("unlink: file within directory"); return 1; }
+            if(filename != "." && filename != "..") {
+                if(removedir(fullpath_cstr) != 0) return 1;
+            } else continue;
+        } else if(unlink(fullpath.c_str()) != 0) { perror("unlink: file within directory"); return 1; }
     }
-
+	
     // tail recursion; delete current dir
     if(rmdir(path) != 0) { perror("rmdir: removing current directory"); return 1; }
 
