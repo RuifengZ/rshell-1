@@ -11,6 +11,11 @@ ls:
 rm:
 		mkdir -p ./bin
 		g++ -Wall -Werror -pedantic ./src/rm.cpp -o ./bin/rm -std=c++11
+	
+mv:
+		mkdir -p ./bin
+		g++ -Wall -Werror -pedantic ./src/mv.cpp -o ./bin/mv -std=c++11
+
 
 clean:
 		rm -rf ./bin

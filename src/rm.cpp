@@ -54,7 +54,7 @@ int removedir(const char* path) {
         std::cout << "Error reading directory " << path << std::endl; 
         return 1;
     } else if(scan_status == 1) {
-        if(unlink(path) != 0) { perror("unlink 1"); return 1; }
+        if(unlink(path) != 0) { perror("unlink: file"); return 1; }
         return 0;
     }
 
@@ -64,7 +64,7 @@ int removedir(const char* path) {
         struct stat filestat;
         std::string fullpath = std::string(path) + "/" + f;
         const char* fullpath_cstr = fullpath.c_str();
-        if(stat(fullpath_cstr, &filestat) == -1) { perror("stat"); return 1; }
+        if(stat(fullpath_cstr, &filestat) == -1) { perror("stat: file within directory"); return 1; }
 
         // extract filename from full path
         std::string filename(fullpath);
@@ -76,11 +76,11 @@ int removedir(const char* path) {
             else continue;
         }
 
-        if(unlink(fullpath.c_str()) != 0) { perror("unlink 2"); return 1; }
+        if(unlink(fullpath.c_str()) != 0) { perror("unlink: file within directory"); return 1; }
     }
 
     // tail recursion; delete current dir
-    if(rmdir(path) != 0) { perror("rmdir"); return 1; }
+    if(rmdir(path) != 0) { perror("rmdir: removing current directory"); return 1; }
 
     return 0;
 }

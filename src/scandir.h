@@ -5,14 +5,14 @@
 int scandir(const char* path, std::vector<std::string> &files) {
    
     struct stat stat_buf;
-    if(stat(path, &stat_buf) == -1) { perror("stat"); return 1; }
+    if(stat(path, &stat_buf) == -1) { perror("stat: looking up file"); return 1; }
 
     if(!S_ISDIR(stat_buf.st_mode))
         return 1;
 
 	DIR* dirp;
     if( (dirp = opendir(path)) == NULL) {
-        perror("opendir");
+        perror("opendir: attempting to open directory");
         return -1; 
     }
 
@@ -23,12 +23,12 @@ int scandir(const char* path, std::vector<std::string> &files) {
         files.push_back(entry->d_name);
     
     if(errno != 0) {
-        perror("readdir");
+        perror("readdir: attempting to read directory contents");
         return -1;
     }
 
    if(closedir(dirp) != 0) {
-        perror("closedir");
+        perror("closedir: attempting to close directory");
         return -1;
     }
 
