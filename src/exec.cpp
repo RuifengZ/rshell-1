@@ -11,10 +11,14 @@ using namespace std;
 using namespace boost;
 int main()
 {
-    string username=getlogin();
     char hostname[999];
-    gethostname(hostname, 999);
-    string stringinput;
+    if(gethostname(hostname, 999)==-1)
+		perror("hostname");
+	char login[999];
+	if(getlogin_r(login,999)==-1)
+		perror("login");
+    
+	string stringinput;
     char* input[999];
     char_separator<char> ands("&&");
     char_separator<char> ors("||");
@@ -22,13 +26,7 @@ int main()
     while(true)
     {
         //if the user name and hostname both exists, then the program displays it before the dollar sign.
-        if(getlogin() != '\0' && gethostname(hostname,999) != -1)    
-            cout << username << "@" << hostname << "$ ";
-        else
-        {
-            perror("your hostname or username couldn't be found!");
-            cout << "$ ";
-        }
+        cout << login << "@" << hostname << "$ ";
         getline(cin,stringinput);
         //this checks for comments. Basically, everything after the hash symbol is useless
         if(stringinput.find("#") != string::npos)
@@ -68,15 +66,12 @@ int main()
                         perror("Command is bad and not good!");
                         exit(1);
                     }
-                    else
-                    {
-                        cout << "Good!" << execvp(input[0],input) << endl;
-                    }
                 }
                 else if(pid>=1)
                 {
-                    waitpid(-1,&status,0);
-                    if(status<=0)
+                    if(wait(&status)==-1)
+						perror("wait");
+					if(status<=0)
                         break;
                 }
             }
@@ -118,15 +113,12 @@ int main()
                         perror("Command is bad and not good!");
                         exit(1);
                     }
-                    else
-                    {
-                        cout << "Good!" << execvp(input[0],input) << endl;
-                    }
                 }
                 else if(pid>=1)
                 {
-                    waitpid(-1,&status,0);
-                    if(status>0)
+                    if(wait(&status)==-1)
+						perror("wait");
+					if(status>0)
                         break;
                 }
             }
@@ -169,15 +161,14 @@ int main()
                         perror("Command is bad and not good!");
                         exit(1);
                     }
-                    else
-                    {
-                        cout << "Good!" << execvp(input[0],input) << endl;
-                    }
                 }
                 else if(pid>=1)
                 {
                     waitpid(-1,&status,0);
                     //waits for the child to finish
+                    if(wait(&status)==-1)
+						perror("wait");
+					//waits for the child to finish
                 }
             }
         }
