@@ -11,10 +11,14 @@ using namespace std;
 using namespace boost;
 int main()
 {
-    string username=getlogin();
     char hostname[999];
-    gethostname(hostname, 999);
-    string stringinput;
+    if(gethostname(hostname, 999)==-1)
+		perror("hostname");
+	char login[999];
+	if(getlogin_r(login,999)==-1)
+		perror("login");
+    
+	string stringinput;
     char* input[999];
     char_separator<char> ands("&&");
     char_separator<char> ors("||");
@@ -22,19 +26,14 @@ int main()
     while(true)
     {
         //if the user name and hostname both exists, then the program displays it before the dollar sign.
-        if(getlogin() != '\0' && gethostname(hostname,999) != -1)    
-            cout << username << "@" << hostname << "$ ";
-        else
-        {
-            perror("your hostname or username couldn't be found!");
-            cout << "$ ";
-        }
+        cout << login << "@" << hostname << "$ ";
         getline(cin,stringinput);
         //this checks for comments. Basically, everything after the hash symbol is useless
         if(stringinput.find("#") != string::npos)
         {
             stringinput=stringinput.substr(0,stringinput.find("#"));
         }
+        //this checks for ||
         if(stringinput.find("||")!=string::npos )
         {
             tokenizer<char_separator<char> > toke(stringinput,ors);
@@ -67,21 +66,19 @@ int main()
                         perror("Command is bad and not good!");
                         exit(1);
                     }
-                    else
-                    {
-                        cout << "Good!" << execvp(input[0],input) << endl;
-                    }
                 }
                 else if(pid>=1)
                 {
-                    waitpid(-1,&status,0);
-                    if(status<=0)
+                    if(wait(&status)==-1)
+						perror("wait");
+					if(status<=0)
                         break;
                 }
             }
             if(stringinput.find("exit")!=string::npos)
                 continue;
         }
+        //this checks for &&
         else if(stringinput.find("&&")!=string::npos )
         {
             if(stringinput.find("exit")!=string::npos)
@@ -116,19 +113,17 @@ int main()
                         perror("Command is bad and not good!");
                         exit(1);
                     }
-                    else
-                    {
-                        cout << "Good!" << execvp(input[0],input) << endl;
-                    }
                 }
                 else if(pid>=1)
                 {
-                    waitpid(-1,&status,0);
-                    if(status>0)
+                    if(wait(&status)==-1)
+						perror("wait");
+					if(status>0)
                         break;
                 }
             }
         }
+        //this checks for ; and other things
         else
         {
             tokenizer<char_separator<char> > toke(stringinput,semico);
@@ -144,8 +139,10 @@ int main()
                     perror("this is an error with fork()");
                     exit(1);
                 }
+                //checks on the child
                 else if(pid==0)
                 {
+                    //starts to parse and token
                     int counter=0;
                     tokenizer<char_separator<char> >::iterator 
                     it1=tok.begin();
@@ -158,19 +155,18 @@ int main()
                     input[counter]=0;
                     
                     int good=execvp(input[0],input);
+                    //finds a invalid command
                     if(good==-1)
                     {
                         perror("Command is bad and not good!");
                         exit(1);
                     }
-                    else
-                    {
-                        cout << "Good!" << execvp(input[0],input) << endl;
-                    }
                 }
                 else if(pid>=1)
                 {
-                    waitpid(-1,&status,0);
+                    if(wait(&status)==-1)
+						perror("wait");
+					//waits for the child to finish
                 }
             }
         }
