@@ -294,6 +294,69 @@ int main()
 					}
 				}
 			}
+			cout << endl;
+		}
+		else if(stringinput.find("<")!=string::npos)
+		{
+			string single="<";
+			string result;
+			int out=-1,in=-1;
+			int fd[2];
+			string left=stringinput.substr(0,stringinput.find(single));
+			string right=stringinput.substr(stringinput.find(single)+single.size());
+			string prev=right;
+			in=openF(prev,O_RDWR);
+			if(in==-1)
+				perror("in");
+			if(right.find(">")!=string::npos)
+			{
+				prev=prev.substr(0,right.find(">"));
+				int perm=O_RDWR|O_CREAT;
+				int index;
+				if(right.find(">>")!=string::npos)
+				{
+					perm |= O_APPEND;
+					index=right.find(">>")+2;
+				}
+				else
+				{
+					perm |= O_TRUNC;
+					index=right.find(">")+1;
+				}
+				right=right.substr(index);
+				out=openF(right,perm);
+			}
+			pid_t pid=fork();
+			if(pid==-1)
+				perror("fork");
+			else if(pid==0)
+				execR(left,in,out,-1);
+			else
+			{
+				if(wait(0)==-1)
+				{
+					perror("wait");
+					exit(1);
+				}
+				if(in!=-1)
+				{
+					if(close(in)==-1)
+					{
+						perror("close");
+						exit(1);
+					}
+				}
+				if(out!=-1)
+				{
+					if(close(out)==-1)
+					{
+						perror("close");
+						exit(1);
+					}
+				}
+			}
+
+
 		}
         else if(stringinput.find(">>")!=string::npos)
 		{
@@ -310,6 +373,44 @@ int main()
 				perror("fork");
 			else if(pid==0)
 				execR(left,in,good,-1);
+			else
+			{
+				if(wait(0)==-1)
+				{
+					perror("wait");
+					exit(1);
+				}
+				if(close(good)==-1)
+				{
+					perror("close");
+					exit(1);
+				}
+			}	
+		}
+		else if(stringinput.find(">")!=string::npos)
+		{
+			int in=-1,out=-1;
+			string singlein=">";
+			int perm=O_RDWR|O_CREAT;
+			perm |= O_TRUNC;
+			int index=stringinput.find(singlein);
+			if(stringinput.find("2>")!=string::npos)
+				index--;
+			if(stringinput.find("1>")!=string::npos)
+				index--;
+			string left=stringinput.substr(0,index);
+			string right=stringinput.substr(stringinput.find(singlein)+singlein.size());
+			int good=openF(right,perm);
+			pid_t pid=fork();
+			if(pid==-1)
+				perror("fork");
+			else if(pid==0)
+			{
+				if	(stringinput.find("2>")!=string::npos)
+					execR(left,in,-1,good);
+				else
+					execR(left,in,good,-1);
+			}
 			else
 			{
 				if(wait(0)==-1)
