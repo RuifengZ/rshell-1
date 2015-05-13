@@ -150,19 +150,8 @@ void reset(bool b)
 		}
 	}
 }
-void execR(const string &in, int sin, int sout, int serr)
+void errorfd(int sin, int sout, int serr)
 {
-	char *input[999];
-	int counter=0;
-	char_separator<char> space(" ");
- 	tokenizer<char_separator<char> > tok(in, space);
-	tokenizer<char_separator<char> >::iterator it1=tok.begin();
-	for(;it1!=tok.end();it1++,counter++)
-	{
-    	input[counter]=new char[(*it1).size()];
-    	strcpy(input[counter],(*it1).c_str());
-  	}
-   	input[counter]=0;
 	if(sin >= 0)
 	{
 		if(close(0)==-1)
@@ -202,6 +191,21 @@ void execR(const string &in, int sin, int sout, int serr)
 			exit(1);
 		}
 	}
+}
+void execR(const string &in, int sin, int sout, int serr)
+{
+	char *input[999];
+	int counter=0;
+	char_separator<char> space(" ");
+ 	tokenizer<char_separator<char> > tok(in, space);
+	tokenizer<char_separator<char> >::iterator it1=tok.begin();
+	for(;it1!=tok.end();it1++,counter++)
+	{
+    	input[counter]=new char[(*it1).size()];
+    	strcpy(input[counter],(*it1).c_str());
+  	}
+   	input[counter]=0;
+	errorfd(sin,sout,serr);
 	int good=(execvp(input[0],input));
 	if(good==-1)
 	{
