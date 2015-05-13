@@ -12,6 +12,16 @@
 #include<boost/tokenizer.hpp> 
 using namespace std; 
 using namespace boost; //this function checks for which file descriptor 
+
+
+struct pipeid
+{
+	string left;
+	int fd[2];
+
+};
+vector <pipeid> a;
+int savestd[2];
 int openF(const string &in, int perms)
 {
 	char_separator<char> space(" ");
@@ -21,6 +31,124 @@ int openF(const string &in, int perms)
 	if(good==-1)
 		perror("open");
 	return good;
+}
+void execP(const string &in)
+{
+	char *input[999];
+	int counter=0;
+	char_separator<char> space(" ");
+ 	tokenizer<char_separator<char> > tok(in, space);
+	tokenizer<char_separator<char> >::iterator it1=tok.begin();
+	for(;it1!=tok.end();it1++,counter++)
+	{
+    	input[counter]=new char[(*it1).size()];
+    	strcpy(input[counter],(*it1).c_str());
+  	}
+   	input[counter]=0;
+
+	int good=(execvp(input[0],input));
+	if(good==-1)
+	{
+		perror("execvp");
+		for(counter=0,it1=tok.begin(); it1!=tok.end(); it1++, counter++)
+			delete[] input[counter];
+		exit(1);
+	}
+
+
+}
+void setpipe(bool first, bool last, pipeid i, pipeid p)
+{	
+	if (first)
+	{
+		if((savestd[0] = dup(0))==-1)
+		{
+			perror("dup");
+			exit(1);
+		}
+		if((savestd[1] = dup(1))==-1)
+		{
+			perror("dup");
+			exit(1);
+		}
+	}
+	if (!first)
+	{
+		if(close(0)==-1)
+		{
+			perror("close");
+			exit(1);
+		}
+		if(dup(p.fd[0])==-1)
+		{
+			perror("dup");
+			exit(1);
+		}
+		if(close(p.fd[0])==-1)
+		{
+			perror("close");
+			exit(1);
+		}
+	}
+	if (!last)
+	{
+		if(close(1)==-1)
+		{
+			perror("close");
+			exit(1);
+		}
+		if(dup(i.fd[1])==-1)
+		{
+			perror("dup");
+			exit(1);
+		}
+		if(close(i.fd[1])==-1)
+		{
+			perror("close");
+			exit(1);
+		}
+
+	}
+	if (last)
+	{
+		if(close(1)==-1)
+		{
+			perror("close");
+			exit(1);
+		}
+		if(dup2(savestd[1], 1)==-1)
+		{
+			perror("dup2");
+			exit(1);
+		}
+		if(close(savestd[1])==-1)
+		{
+			perror("close");
+			exit(1);
+		}
+		
+	}
+}
+void reset(bool b)
+{
+	if (b)
+	{
+		if(close(0)==-1)
+		{
+			perror("close");
+			exit(1);
+		}
+		if(dup2(savestd[0], 0)==-1)
+		{
+			perror("dup2");
+			exit(1);
+		}
+		if(close(savestd[0])==-1)
+		{
+			perror("close");
+			exit(1);
+		}
+	}
 }
 void execR(const string &in, int sin, int sout, int serr)
 {
@@ -358,6 +486,78 @@ int main()
 
 
 		}
+		else if (stringinput.find("|") != string::npos)
+		{	
+			a.clear();
+			bool b = true;
+			string singlein="|";
+			int index;
+			//while loop makes a vector of all the arguments passed in with a pipe
+			//while loop also creates a pipe for all the arguments
+			pipeid tmp;
+			while ( string::npos !=  (index=stringinput.find(singlein)))
+			{
+				tmp.left=stringinput.substr(0,index);
+				if(pipe(tmp.fd)==-1)
+				{
+					perror("pipe");
+					exit(1);
+				}
+				a.push_back(tmp);
+				stringinput=stringinput.substr(stringinput.find(singlein)+singlein.size());
+			}
+			tmp.left = stringinput;
+			if(pipe(tmp.fd)==-1)
+			{
+				perror("pipe");
+				exit(1);
+			}
+			a.push_back(tmp);
+			//loop through and execute all arguemnts 
+			int i = 0;
+			while(i != a.size())
+			{
+				//sets the pipe 
+				bool first = false;
+				bool last = false;
+				pipeid asdf = a.at(i);
+				//first argument
+				if (i == 0)
+				{
+					first = true;
+					setpipe(first, last, asdf, asdf);
+				}
+				//last arguemnt
+				else if (i == a.size() - 1)
+				{
+					pipeid asdfp;
+					asdfp = a.at(i-1);
+					last = true;
+					setpipe(first, last, asdf, asdfp);
+				}
+				//middle arguments
+				else
+				{
+					pipeid asdfp = a.at(i-1);
+					setpipe(first, last, asdf, asdfp);
+				}
+				//forks and executes the commands 
+
+				pid_t pid=fork();
+				if(pid==-1)
+					perror("fork");
+				else if(pid==0)
+				{
+					execP(a.at(i).left);
+				}
+				i++;
+				
+			}
+			int status = 0;
+			while ( wait(&status) > 0);
+			reset(b);
+		}
+
         else if(stringinput.find(">>")!=string::npos)
 		{
 			int in=-1,out=-1;
