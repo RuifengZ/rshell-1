@@ -1,0 +1,738 @@
+Script started on Thu 14 May 2015 09:11:17 PM PDT
+~
+kchan049@hammer $ cs100
+[0;91m
+===============================================================================
+|                                                                             |
+| You have enabled settings specific for cs100.  Everything you do is being   |
+| recorded to measure your progress in the class.                             |
+|                                                                             |
+| Important commands for the class:                                           |
+|   * calcgrade.sh          displays a detailed breakdown of your grade       |
+|   * checksyscalls.sh      is your cpp file doing proper error checking?     |
+|   * typespeed             practice typing unix commands                     |
+|                                                                             |
+| Important commands for general C++ programming:                             |
+|   * make                  don't call g++ manually; let make do the work!    |
+|   * gdb                   the GNU debugger                                  |
+|   * valgrind              get rid of your memory leaks                      |
+|   * cppcheck              static analysis tool                              |
+|   * man                   find help about any syscall / terminal command    |
+|                                                                             |
+===============================================================================
+[0m
+[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m ls
+assn3.asm  assn4.asm  assn5.asm  assn6.asm  Desktop  Downloads	lab5  rshell
+[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd Desktop/cs100/rshell/
+[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~/Desktop/cs100/rshell[0;95m (redir) [0;36m$[0m bin/rshell
+kchan049@hammer.cs.ucr.edu$ cat < test          #input redirection
+kchan049@hammer.cs.ucr.edu$ cat < test
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+Makefile
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ cat < test100
+open: No such file or directory
+in: No such file or directory
+^C
+[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~/Desktop/cs100/rshell[0;95m (redir) [0;36m$[0m c[Kbin/rshell
+kchan049@hammer.cs.ucr.edu$ cat      <       test
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+Makefile
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$    cat    <     test   
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+Makefile
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ cat<test
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+Makefile
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ cat < test | ls -a
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+Makefile
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ #output di  redirection
+kchan049@hammer.cs.ucr.edu$ ls -a > test
+kchan049@hammer.cs.ucr.edu$ cat < test
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+Makefile
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ l ls -a > ppp
+kchan049@hammer.cs.ucr.edu$ cat < ppp
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+Makefile
+ppp
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ ls -a >> ppp
+kchan049@hammer.cs.ucr.edu$ cat < ppp
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+Makefile
+ppp
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+Makefile
+ppp
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ ls -a >> lll
+kchan049@hammer.cs.ucr.edu$ cat < lll
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+lll
+Makefile
+ppp
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ c ls     -a      > ppp     >    ppp
+kchan049@hammer.cs.ucr.edu$ cat < ppp
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+lll
+Makefile
+ppp
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$    ls    -a    >    pppp
+kchan049@hammer.cs.ucr.edu$ cat < pppp
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+lll
+Makefile
+ppp
+pppp
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ ls       -a     >> ppp         ppp   ppp
+kchan049@hammer.cs.ucr.edu$   ls    -a    >>     pp                       cat < ppp
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+lll
+Makefile
+ppp
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+lll
+Makefile
+ppp
+pppp
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$     ls    -a      >> pppp[[  pppp       ower
+kchan049@hammer.cs.ucr.edu$ cat < power
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+lll
+Makefile
+power
+ppp
+pppp
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ ls -a>pwer  
+kchan049@hammer.cs.ucr.edu$ cat < pw
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+lll
+Makefile
+power
+ppp
+pppp
+pw
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ ls -a>>pwer 
+kchan049@hammer.cs.ucr.edu$ cat < pwe
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+lll
+Makefile
+power
+ppp
+pppp
+pw
+pwe
+pwer
+qiojwef
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ #piping
+kchan049@hammer.cs.ucr.edu$ ls | ls
+abc   asdf.cpp	bin  LICENSE   power  pw    qiojwef    test   testerr
+abcd  bcd	fds  lll       ppp    pwe   README.md  test2  tests
+asdf  bcde	gfd  Makefile  pppp   pwer  src        test3
+kchan049@hammer.cs.ucr.edu$ ls | grep e
+bcde
+Makefile
+power
+pwe
+pwer
+qiojwef
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ ls | grep e | grep e t
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ ls     |      grep e
+bcde
+Makefile
+power
+pwe
+pwer
+qiojwef
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$    ls |    \ |    gre[   p e     e
+bcde
+Makefile
+power
+pwe
+pwer
+qiojwef
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ ls|grep e
+bcde
+Makefile
+power
+pwe
+pwer
+qiojwef
+test
+test2
+test3
+testerr
+tests
+kchan049@hammer.cs.ucr.edu$ ls | ls > c      ls > www
+kchan049@hammer.cs.ucr.edu$ cat < www
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+LICENSE
+lll
+Makefile
+power
+ppp
+pppp
+pw
+pwe
+pwer
+qiojwef
+qqq
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+www
+kchan049@hammer.cs.ucr.edu$ cat < test | ls -a | cat > test2
+kchan049@hammer.cs.ucr.edu$ cat < test2
+./
+../
+abc*
+abcd*
+asdf*
+asdf.cpp
+bcd*
+bcde*
+bin/
+fds*
+gfd*
+.git/
+LICENSE
+lll*
+Makefile
+power*
+ppp*
+pppp*
+pw*
+pwe*
+pwer*
+qiojwef*
+qqq*
+README.md
+src/
+test*
+test2*
+test3*
+testerr*
+tests/
+kchan049@hammer.cs.ucr.edu$ #extra credit 1
+kchan049@hammer.cs.ucr.edu$ cat " <<< "extra credit rocks b   fuck you          fuck busra           "
+extra credit rocks
+kchan049@hammer.cs.ucr.edu$ #extra credit 2
+kchan049@hammer.cs.ucr.edu$ ls -a 1> asdf
+kchan049@hammer.cs.ucr.edu$ cat < asdf
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+lll
+Makefile
+power
+ppp
+pppp
+pw
+pwe
+pwer
+qiojwef
+qqq
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+www
+kchan049@hammer.cs.ucr.edu$ ls -a 1>> asdf
+kchan049@hammer.cs.ucr.edu$ cat < asdf
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+lll
+Makefile
+power
+ppp
+pppp
+pw
+pwe
+pwer
+qiojwef
+qqq
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+www
+.
+..
+abc
+abcd
+asdf
+asdf.cpp
+bcd
+bcde
+bin
+fds
+gfd
+.git
+LICENSE
+lll
+Makefile
+power
+ppp
+pppp
+pw
+pwe
+pwer
+qiojwef
+qqq
+README.md
+src
+test
+test2
+test3
+testerr
+tests
+www
+kchan049@hammer.cs.ucr.edu$ g++ asdf.cpp 1> asdf
+/usr/lib/../lib64/crt1.o: In function `_start':
+(.text+0x20): undefined reference to `main'
+collect2: error: ld returned 1 exit status
+kchan049@hammer.cs.ucr.edu$ cat < asdf
+kchan049@hammer.cs.ucr.edu$ g++   asdf.cpp 1> aa
+/usr/lib/../lib64/crt1.o: In function `_start':
+(.text+0x20): undefined reference to `main'
+collect2: error: ld returned 1 exit status
+kchan049@hammer.cs.ucr.edu$ asdf.cpp 2 1 2> aa
+kchan049@hammer.cs.ucr.edu$ cat < aa
+execvp: Permission denied
+kchan049@hammer.cs.ucr.edu$ asdf.cpp 2>> asdf
+kchan049@hammer.cs.ucr.edu$ cat < asdf
+execvp: Permission denied
+kchan049@hammer.cs.ucr.edu$ ca  t <       g++ asdf.cpp 2> asdf
+kchan049@hammer.cs.ucr.edu$ cat < asdf
+/usr/lib/../lib64/crt1.o: In function `_start':
+(.text+0x20): undefined reference to `main'
+collect2: error: ld returned 1 exit status
+kchan049@hammer.cs.ucr.edu$ g++ asdf.cpp 2>> asdf
+kchan049@hammer.cs.ucr.edu$ cat < asdf
+/usr/lib/../lib64/crt1.o: In function `_start':
+(.text+0x20): undefined reference to `main'
+collect2: error: ld returned 1 exit status
+/usr/lib/../lib64/crt1.o: In function `_start':
+(.text+0x20): undefined reference to `main'
+collect2: error: ld returned 1 exit status
+kchan049@hammer.cs.ucr.edu$ exit
+[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~/Desktop/cs100/rshell[0;95m (redir) [0;36m$[0m exit
+exit
+~
+kchan049@hammer $ exit
+exit
+
+Script done on Thu 14 May 2015 09:23:48 PM PDT
