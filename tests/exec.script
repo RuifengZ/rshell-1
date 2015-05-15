@@ -1,11 +1,14 @@
-Script started on Fri 17 Apr 2015 07:14:42 PM PDT
+Script started on Fri 17 Apr 2015 10:15:24 PM PDT
 ~
-kchan049@hammer $ cd Desktop/cs100/rshell
+kchan049@hammer $ cd CS[K[Kcs100/rshell
+bash: cd: cs100/rshell: No such file or directory
+~
+kchan049@hammer $ b[Kcd Desktop/cs100/rshell
 ~/Desktop/cs100/rshell
-kchan049@hammer $ bin/rshell
-kchan049@hammer.cs.ucr.edu$ #be  testing starting now
-kchan049@hammer.cs.ucr.edu$ #basic omman     commands
-kchan049@hammer.cs.ucr.edu$ ls
+kchan049@hammer $ cd [K[K[Kbin/rshell
+kchan049@hammer.cs.ucr.edu$ #begin testing
+kchan049@hammer.cs.ucr.edu$ #tt est basic commands
+kchan049@hammer.cs.ucr.edu$ ls 
 bin  LICENSE  Makefile	README.md  src	tests
 kchan049@hammer.cs.ucr.edu$ pwd
 /home/csmajs/kchan049/Desktop/cs100/rshell
@@ -14,206 +17,292 @@ cat
 kchan049@hammer.cs.ucr.edu$ mkdir
 mkdir: missing operand
 Try `mkdir --help' for more information.
-kchan049@hammer.cs.ucr.edu$ cd 
+kchan049@hammer.cs.ucr.edu$ cd
 Command is bad and not good!: No such file or directory
 kchan049@hammer.cs.ucr.edu$ pwd
 /home/csmajs/kchan049/Desktop/cs100/rshell
-kchan049@hammer.cs.ucr.edu$      pwd
+kchan049@hammer.cs.ucr.edu$     pwd
 /home/csmajs/kchan049/Desktop/cs100/rshell
-kchan049@hammer.cs.ucr.edu$    pwd pwd
+kchan049@hammer.cs.ucr.edu$      pwd     pwd
 pwd: ignoring non-option arguments
 /home/csmajs/kchan049/Desktop/cs100/rshell
 kchan049@hammer.cs.ucr.edu$ ps
   PID TTY          TIME CMD
-34451 pts/78   00:00:00 bash
-34482 pts/78   00:00:00 rshell
-34521 pts/78   00:00:00 ps
-kchan049@hammer.cs.ucr.edu$ #testing arguments with basic commands
-kchan049@hammer.cs.ucr.edu$ ls -a -l
+19185 pts/47   00:00:00 bash
+19258 pts/47   00:00:00 rshell
+22766 pts/47   00:00:00 ps
+kchan049@hammer.cs.ucr.edu$ #testing arguments with basic ci ommands
+kchan049@hammer.cs.ucr.edu$ ls -a o -l
 total 36
-drwx------ 6 kchan049 csmajs 4096 Apr 17 17:41 .
+drwx------ 6 kchan049 csmajs 4096 Apr 17 22:09 .
 drwx------ 7 kchan049 csmajs 4096 Apr 13 12:41 ..
-drwx------ 2 kchan049 csmajs 4096 Apr 17 19:08 bin
-drwx------ 8 kchan049 csmajs 4096 Apr 17 19:08 .git
+drwx------ 2 kchan049 csmajs 4096 Apr 17 22:09 bin
+drwx------ 8 kchan049 csmajs 4096 Apr 17 20:27 .git
 -rw------- 1 kchan049 csmajs 1076 Apr  8 14:04 LICENSE
--rw------- 1 kchan049 csmajs  223 Apr 15 18:09 Makefile
--rw------- 1 kchan049 csmajs 1049 Apr 17 16:55 README.md
-drwx------ 2 kchan049 csmajs 4096 Apr 17 19:08 src
-drwx------ 2 kchan049 csmajs 4096 Apr 17 18:15 tests
-kchan049@hammer.cs.ucr.edu$ echo jwieofjwioef             jweoifwjeoif
-jwieofjwioef jweoifwjeoif
-kchan049@hammer.cs.ucr.edu$ echo dad    mom           dammit
-dad mom dammit
-kchan049@hammer.cs.ucr.edu$ ls -a -a -a -a -a
-.  ..  bin  .git  LICENSE  Makefile  README.md	src  tests
-kchan049@hammer.cs.ucr.edu$ ls -aaaaaaaaaaaaaaaaaaaaaaaaaaaa
-.  ..  bin  .git  LICENSE  Makefile  README.md	src  tests
-kchan049@hammer.cs.ucr.edu$ #testing : ; connector^[[D^[[D^[[D^[[D
+-rw------- 1 kchan049 csmajs  223 Apr 17 19:38 Makefile
+-rw------- 1 kchan049 csmajs 1338 Apr 17 20:16 README.md
+drwx------ 2 kchan049 csmajs 4096 Apr 17 21:44 src
+drwx------ 2 kchan049 csmajs 4096 Apr 17 22:09 tests
+kchan049@hammer.cs.ucr.edu$ echo dad and mom
+dad and mom
+kchan049@hammer.cs.ucr.edu$ echo wweifj weijfiwejfii w                 wieojfoiwejf
+wweifj weijfiwejfii w wieojfoiwejf
+kchan049@hammer.cs.ucr.edu$ mkdir pie
+kchan049@hammer.cs.ucr.edu$ ls
+bin  LICENSE  Makefile	pie  README.md	src  tests
+kchan049@hammer.cs.ucr.edu$ ls  - -0 - a
+Command is bad and not good!: No such file or directory
+kchan049@hammer.cs.ucr.edu$ rm dir pie i      
+rm: cannot remove `dir': No such file or directory
+rm: cannot remove `pie': Is a directory
+kchan049@hammer.cs.ucr.edu$ rm dir  pie
+rm: cannot remove `di': No such file or directory
+rm: cannot remove `pie': Is a directory
+kchan049@hammer.cs.ucr.edu$ rm dir pie      dir pie
+rm: cannot remove `dir': No such file or directory
+rm: cannot remove `pie': Is a directory
+rm: cannot remove `dir': No such file or directory
+rm: cannot remove `pie': Is a directory
+kchan049@hammer.cs.ucr.edu$ ls
+bin  LICENSE  Makefile	pie  README.md	src  tests
+kchan049@hammer.cs.ucr.edu$ ls -a-a-a-a-a-          -a -a -a
+.  ..  bin  .git  LICENSE  Makefile  pie  README.md  src  tests
+kchan049@hammer.cs.ucr.edu$ ls -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+.  ..  bin  .git  LICENSE  Makefile  pie  README.md  src  tests
+kchan049@hammer.cs.ucr.edu$ #testing ; connector
 kchan049@hammer.cs.ucr.edu$ pwd ; mkdir
 /home/csmajs/kchan049/Desktop/cs100/rshell
 mkdir: missing operand
 Try `mkdir --help' for more information.
-kchan049@hammer.cs.ucr.edu$ ls ; ls ; ls
-bin  LICENSE  Makefile	README.md  src	tests
-bin  LICENSE  Makefile	README.md  src	tests
-bin  LICENSE  Makefile	README.md  src	tests
-kchan049@hammer.cs.ucr.edu$ ;s ls; pwd
+kchan049@hammer.cs.ucr.edu$ pwd ; sl  ls
+/home/csmajs/kchan049/Desktop/cs100/rshell
+bin  LICENSE  Makefile	pie  README.md	src  tests
+kchan049@hammer.cs.ucr.edu$ ml kdir echo 1s 2s2 2s  1s3 1s4 1s5 ; ls ; d rmdir ls ls2
+Command is bad and not good!: No such file or directory
+bin  LICENSE  Makefile	pie  README.md	src  tests
+Command is bad and not good!: No such file or directory
+kchan049@hammer.cs.ucr.edu$ ls; pwd
+bin  LICENSE  Makefile	pie  README.md	src  tests
+/home/csmajs/kchan049/Desktop/cs100/rshell
+kchan049@hammer.cs.ucr.edu$ ;s ls ; pwd
 Command is bad and not good!: No such file or directory
 /home/csmajs/kchan049/Desktop/cs100/rshell
-kchan049@hammer.cs.ucr.edu$ ls; pwd
-bin  LICENSE  Makefile	README.md  src	tests
+kchan049@hammer.cs.ucr.edu$ ls ; pqs =d   wd
+bin  LICENSE  Makefile	pie  README.md	src  tests
 /home/csmajs/kchan049/Desktop/cs100/rshell
-kchan049@hammer.cs.ucr.edu$ ls      ; pwd
-bin  LICENSE  Makefile	README.md  src	tests
+kchan049@hammer.cs.ucr.edu$ ls    ; pwd
+bin  LICENSE  Makefile	pie  README.md	src  tests
 /home/csmajs/kchan049/Desktop/cs100/rshell
 kchan049@hammer.cs.ucr.edu$ ls;
-bin  LICENSE  Makefile	README.md  src	tests
-kchan049@hammer.cs.ucr.edu$ ;ls
-bin  LICENSE  Makefile	README.md  src	tests
+bin  LICENSE  Makefile	pie  README.md	src  tests
+kchan049@hammer.cs.ucr.edu$ l ;ls
+bin  LICENSE  Makefile	pie  README.md	src  tests
 kchan049@hammer.cs.ucr.edu$ ls ;;
-bin  LICENSE  Makefile	README.md  src	tests
-kchan049@hammer.cs.ucr.edu$ ls;; pwd
-bin  LICENSE  Makefile	README.md  src	tests
+bin  LICENSE  Makefile	pie  README.md	src  tests
+kchan049@hammer.cs.ucr.edu$ ls ;; pwd
+bin  LICENSE  Makefile	pie  README.md	src  tests
 /home/csmajs/kchan049/Desktop/cs100/rshell
-kchan049@hammer.cs.ucr.edu$ ;s -a; ;s -a; make      echo ct   at dog
+kchan049@hammer.cs.ucr.edu$ ;s -a ; s -a; make cak   wejfiowefj echo cat
 Command is bad and not good!: No such file or directory
 Command is bad and not good!: No such file or directory
-cat dog
-kchan049@hammer.cs.ucr.edu$ ls -a; ls -ewfe; ls
-.  ..  bin  .git  LICENSE  Makefile  README.md	src  tests
-ls: invalid option -- 'e'
-Try `ls --help' for more information.
-bin  LICENSE  Makefile	README.md  src	tests
-kchan049@hammer.cs.ucr.edu$       ls; pwd -a; pwdddd; echo cat
-bin  LICENSE  Makefile	README.md  src	tests
+make: *** No rule to make target `wejfiowefj'.  Stop.
+kchan049@hammer.cs.ucr.edu$ ls -a; mkdir fjiwoef       dad; ls -a ; mkdir hi; ls -a; mkdir bye
+.  ..  bin  .git  LICENSE  Makefile  pie  README.md  src  tests
+.  ..  bin  dad  .git  LICENSE	Makefile  pie  README.md  src  tests
+.  ..  bin  dad  .git  hi  LICENSE  Makefile  pie  README.md  src  tests
+kchan049@hammer.cs.ucr.edu$ ls; pwd -a; pwdd  ; echo w dad
+bin  bye  dad  hi  LICENSE  Makefile  pie  README.md  src  tests
 pwd: invalid option -- 'a'
 Try `pwd --help' for more information.
 Command is bad and not good!: No such file or directory
-cat
-kchan049@hammer.cs.ucr.edu$ ajowiejfio ; jad
+dad
+kchan049@hammer.cs.ucr.edu$ wioejf; jiowfejfo
 Command is bad and not good!: No such file or directory
 Command is bad and not good!: No such file or directory
 kchan049@hammer.cs.ucr.edu$ bin/rshell
-kchan049@hammer.cs.ucr.edu$ bin/rshell ; echo dad
+kchan049@hammer.cs.ucr.edu$ bin/rh shell;  ; echo cat
 kchan049@hammer.cs.ucr.edu$ exit
 Command is bad and not good!: No such file or directory
-dad
-kchan049@hammer.cs.ucr.edu$ exit
+cat
+kchan049@hammer.cs.ucr.edu$ ei xit
 Command is bad and not good!: No such file or directory
 kchan049@hammer.cs.ucr.edu$ ;echo cat
 cat
-kchan049@hammer.cs.ucr.edu$ ;; echo cat
+kchan049@hammer.cs.ucr.edu$ echo cat ;; echo dog
 cat
+dog
+kchan049@hammer.cs.ucr.edu$ ;; echo dog
+dog
 kchan049@hammer.cs.ucr.edu$ #testing && connectors
-kchan049@hammer.cs.ucr.edu$ echo cat && echo man
-cat
-man
-kchan049@hammer.cs.ucr.edu$ iaowjefoi && echo dad
+kchan049@hammer.cs.ucr.edu$ man p   dad ** echo dog
+No manual entry for dad
+7[?47h[?1h=ecryptfs-wrap-passphrase(1)        eCryptfs        ecryptfs-wrap-passphrase(1)
+
+[1mNAME[m
+       ecryptfs-wrap-passphrase - wrap an eCryptfs mount passphrase.
+
+[1mSYNOPSIS[m
+       [1mecryptfs-unwrap-passphrase[m [1m[file][m
+
+       printf  "%s\n%s" "passphrase to wrap" "wrapping passphrase" | [1mecryptfs-[m
+       [1mwrap-passphrase[m [1m[file][m [1m-[m
+
+[1mDESCRIPTION[m
+       [1mecryptfs-wrap-passphrase[m  is  a  utility  to  wrap  an  eCryptfs  mount
+       passphrase,  using  a  specified  wrapping  passphrase,  and  write the
+       encrypted output to file.
+
+[1mSEE[m [1mALSO[m
+       [1mecryptfs[m(7),      [1mecryptfs-rewrap-passphrase[m(1),       [1mecryptfs-unwrap-[m
+       [1mpassphrase[m(1)
+
+       [4m/usr/share/doc/ecryptfs-utils-82/ecryptfs-faq.html[m
+
+       [4mhttp://launchpad.net/ecryptfs/[m
+
+:[K[K[1mAUTHOR[m
+       This manpage was written by  Dustin  Kirkland  <kirkland@canonical.com>
+       for  Ubuntu systems (but may be used by others).  Permission is granted
+       to copy, distribute and/or modify this document under the terms of  the
+       GNU General Public License, Version 2 or any later version published by
+       the Free Software Foundation.
+
+       On Debian systems, the complete text of the GNU General Public  License
+       can be found in /usr/share/common-licenses/GPL.
+
+ecryptfs-utils                    2008-07-21       ecryptfs-wrap-passphrase(1)
+[7m(END) [m[K[K[7m(END) [m[K[K[7m(END) [m[K[K [K::[Kww[K[7m(END) [m[K[K[?1l>[2J[?47l87[?47h[?1h=ECHO(1)                          User Commands                         ECHO(1)
+
+[1mNAME[m
+       echo - display a line of text
+
+[1mSYNOPSIS[m
+       [1mecho[m [[4mSHORT-OPTION[m]... [[4mSTRING[m]...
+       [1mecho[m [4mLONG-OPTION[m
+
+[1mDESCRIPTION[m
+       Echo the STRING(s) to standard output.
+
+       [1m-n[m     do not output the trailing newline
+
+       [1m-e[m     enable interpretation of backslash escapes
+
+       [1m-E[m     disable interpretation of backslash escapes (default)
+
+       [1m--help[m display this help and exit
+
+       [1m--version[m
+              output version information and exit
+
+       If [1m-e[m is in effect, the following sequences are recognized:
+:[K[K
+:[K[K[?1l>[2J[?47l8No manual entry for dog
+kchan049@hammer.cs.ucr.edu$ fail && echo dog
 Command is bad and not good!: No such file or directory
-kchan049@hammer.cs.ucr.edu$ man iwoejfoi# && pwd
-No manual entry for iwoejfoi
-kchan049@hammer.cs.ucr.edu$ man wefjiowefj     && pwd
-No manual entry for wefjiowefj
-kchan049@hammer.cs.ucr.edu$    man wiejfiowe && wd  pwd
-No manual entry for wiejfiowe
-kchan049@hammer.cs.ucr.edu$ ls && ls && ls &&&&&& ls &&&&& ls0  -a
-bin  LICENSE  Makefile	README.md  src	tests
-bin  LICENSE  Makefile	README.md  src	tests
-bin  LICENSE  Makefile	README.md  src	tests
-bin  LICENSE  Makefile	README.md  src	tests
-.  ..  bin  .git  LICENSE  Makefile  README.md	src  tests
-kchan049@hammer.cs.ucr.edu$ ls &&&&&&&&&&& echo cat dog
-bin  LICENSE  Makefile	README.md  src	tests
-cat dog
+kchan049@hammer.cs.ucr.edu$ true && true
+kchan049@hammer.cs.ucr.edu$ true &&         man dad && pwd
+No manual entry for dad
+kchan049@hammer.cs.ucr.edu$ ma      man weiofj && pwd
+No manual entry for weiofj
+kchan049@hammer.cs.ucr.edu$ ls &&& p pwd
+bin  bye  dad  hi  LICENSE  Makefile  pie  README.md  src  tests
+Command is bad and not good!: No such file or directory
+kchan049@hammer.cs.ucr.edu$ ls    ls && ls &&& ls &&&&&&& ls &&&&& man pi  dad 
+bin  bye  dad  hi  LICENSE  Makefile  pie  README.md  src  tests
+bin  bye  dad  hi  LICENSE  Makefile  pie  README.md  src  tests
+bin  bye  dad  hi  LICENSE  Makefile  pie  README.md  src  tests
+bin  bye  dad  hi  LICENSE  Makefile  pie  README.md  src  tests
+No manual entry for dad
+kchan049@hammer.cs.ucr.edu$ ls && fail echo cat and ding wi  long
+bin  bye  dad  hi  LICENSE  Makefile  pie  README.md  src  tests
+Command is bad and not good!: No such file or directory
 kchan049@hammer.cs.ucr.edu$ && echo dad
 dad
 kchan049@hammer.cs.ucr.edu$ echo dad &&
 dad
-kchan049@hammer.cs.ucr.edu$ #testing logic fo        || connectors
+kchan049@hammer.cs.ucr.edu$ echo dad && & &&
+dad
+kchan049@hammer.cs.ucr.edu$ echo dad && echo mom & &&&&&&
+dad
+mom
+kchan049@hammer.cs.ucr.edu$ echo mom &&&&&&
+mom
+kchan049@hammer.cs.ucr.edu$ bin/rshell && echo dad
+kchan049@hammer.cs.ucr.edu$ exit
+Command is bad and not good!: No such file or directory
+kchan049@hammer.cs.ucr.edu$ #testing for || 
 kchan049@hammer.cs.ucr.edu$ ls || pwd
-bin  LICENSE  Makefile	README.md  src	tests
-kchan049@hammer.cs.ucr.edu$ echo dad|fat
-dad|fat
-kchan049@hammer.cs.ucr.edu$ echo dad | fat
-dad | fat
-kchan049@hammer.cs.ucr.edu$ man wioejfiow ||||||
-No manual entry for wioejfiow
-kchan049@hammer.cs.ucr.edu$ echo wjeiofjwe ||| echo dad
-wjeiofjwe
-kchan049@hammer.cs.ucr.edu$ iwoejfoiw || eho  cho dad
+bin  bye  dad  hi  LICENSE  Makefile  pie  README.md  src  tests
+kchan049@hammer.cs.ucr.edu$ echo dad | mom
+dad | mom
+kchan049@hammer.cs.ucr.edu$ echo  || mom       mom|| dad
+mom
+kchan049@hammer.cs.ucr.edu$ cat dad || fat
+cat: dad: Is a directory
+Command is bad and not good!: No such file or directory
+kchan049@hammer.cs.ucr.edu$ man dad ||||||||||||
+No manual entry for dad
+kchan049@hammer.cs.ucr.edu$ man pie || |||||
+No manual entry for pie
+kchan049@hammer.cs.ucr.edu$ man dad ||| eho  c  c  cho wat
+No manual entry for dad
+wat
+kchan049@hammer.cs.ucr.edu$ echo dad || omg|ijwef
+dad
+kchan049@hammer.cs.ucr.edu$ echo dad|mom
+dad|mom
+kchan049@hammer.cs.ucr.edu$ ecs ho  jwoief ||| dog
+Command is bad and not good!: No such file or directory
+Command is bad and not good!: No such file or directory
+kchan049@hammer.cs.ucr.edu$ \\\\ || echo dog
+Command is bad and not good!: No such file or directory
+dog
+kchan049@hammer.cs.ucr.edu$ fail || eho dog
+Command is bad and not good!: No such file or directory
+Command is bad and not good!: No such file or directory
+kchan049@hammer.cs.ucr.edu$ fail || echo mom
+Command is bad and not good!: No such file or directory
+mom
+kchan049@hammer.cs.ucr.edu$ ec  fail | e  | eh cho dad }}  || eho  cho mom
 Command is bad and not good!: No such file or directory
 dad
-kchan049@hammer.cs.ucr.edu$ |||| } || echo dad
-dad
-kchan049@hammer.cs.ucr.edu$ \\\\\ || echo what
-Command is bad and not good!: No such file or directory
-what
-kchan049@hammer.cs.ucr.edu$ ajwioe ||| |    wjefiowjeiof || wejfiow || wejfoijewf || wiefjwioef
-Command is bad and not good!: No such file or directory
-Command is bad and not good!: No such file or directory
-Command is bad and not good!: No such file or directory
-Command is bad and not good!: No such file or directory
-Command is bad and not good!: No such file or directory
-kchan049@hammer.cs.ucr.edu$ wow    ow ||||| wowow
+kchan049@hammer.cs.ucr.edu$ dad }|  || dad || dad || dad |||| dad |||| dad
+Command is bad and not good!: Permission denied
+Command is bad and not good!: Permission denied
+Command is bad and not good!: Permission denied
+Command is bad and not good!: Permission denied
+Command is bad and not good!: Permission denied
+Command is bad and not good!: Permission denied
+kchan049@hammer.cs.ucr.edu$ mom ||||| fail ||| echo mom
 Command is bad and not good!: No such file or directory
 Command is bad and not good!: No such file or directory
-kchan049@hammer.cs.ucr.edu$ || echo dog
-dog
-kchan049@hammer.cs.ucr.edu$ echo dog } ||
-dog
-kchan049@hammer.cs.ucr.edu$ echo cat || exit
-cat
-kchan049@hammer.cs.ucr.edu$ bored || wjoiefjij
+mom
+kchan049@hammer.cs.ucr.edu$ ||echo mom
+mom
+kchan049@hammer.cs.ucr.edu$ || what
 Command is bad and not good!: No such file or directory
+kchan049@hammer.cs.ucr.edu$ dog ||
 Command is bad and not good!: No such file or directory
+kchan049@hammer.cs.ucr.edu$ echo cat food || exit
+cat food
+kchan049@hammer.cs.ucr.edu$ bin/rshell || eho pie     cho      cho mom
+kchan049@hammer.cs.ucr.edu$ exit
+Command is bad and not good!: No such file or directory
+mom
 kchan049@hammer.cs.ucr.edu$ echo dad || bin/rshell
 dad
-kchan049@hammer.cs.ucr.edu$ || || || || ||| ls || pwd
-bin  LICENSE  Makefile	README.md  src	tests
-kchan049@hammer.cs.ucr.edu$ #testing comments
-kchan049@hammer.cs.ucr.edu$ ls && #iwoejf oiwjefoi wefijo
-bin  LICENSE  Makefile	README.md  src	tests
-kchan049@hammer.cs.ucr.edu$ echo dad#wow
-dad
-kchan049@hammer.cs.ucr.edu$ #echo dog
-kchan049@hammer.cs.ucr.edu$ # wjieofj *** iwoejf
-kchan049@hammer.cs.ucr.edu$ ls #exit #exit 
-bin  LICENSE  Makefile	README.md  src	tests
-kchan049@hammer.cs.ucr.edu$ #testing mut ltiple things together
-kchan049@hammer.cs.ucr.edu$ echo dog && echo cat ; echo jwioef wjeiof
-dog
-cat ; echo jwioef wjeiof
-kchan049@hammer.cs.ucr.edu$ pwd && ls weijf && echo dad; echo mom; echo dad
-/home/csmajs/kchan049/Desktop/cs100/rshell
-ls: cannot access weijf: No such file or directory
-kchan049@hammer.cs.ucr.edu$ echo dad  ; echo dog || echo cat
-dad; echo dog
-kchan049@hammer.cs.ucr.edu$ ; echo cat || wieofjweiof || echo dog
+kchan049@hammer.cs.ucr.edu$ man dad || bin/rshell
+No manual entry for dad
+kchan049@hammer.cs.ucr.edu$ exit
 Command is bad and not good!: No such file or directory
+kchan049@hammer.cs.ucr.edu$ #test  st for exit
+kchan049@hammer.cs.ucr.edu$ ;exit
 Command is bad and not good!: No such file or directory
-dog
-kchan049@hammer.cs.ucr.edu$ l ;echo cat
-cat
-kchan049@hammer.cs.ucr.edu$ ;echo cat || echo dog
-Command is bad and not good!: No such file or directory
-dog
-kchan049@hammer.cs.ucr.edu$ echo      false || exit
-Command is bad and not good!: No such file or directory
-kchan049@hammer.cs.ucr.edu$ echo dd   ad && exit
 ~/Desktop/cs100/rshell
-kchan049@hammer $ echo mom || e[K[K[K[K[K[K[K[K[K[K[K[K[K/bin[K[K[K[Kbin/rshell
-kchan049@hammer.cs.ucr.edu$ bin/rh shell
-kchan049@hammer.cs.ucr.edu$ echo mom || exit
-mom
-kchan049@hammer.cs.ucr.edu$ echo man && exit
-kchan049@hammer.cs.ucr.edu$ ex  bin/rshell && bin     exit
+kchan049@hammer $ ;exit
+bash: syntax error near unexpected token `;'
 ~/Desktop/cs100/rshell
-kchan049@hammer $ ls
-[0m[38;5;27mbin[0m/  LICENSE  Makefile  README.md  [38;5;27msrc[0m/  [38;5;27mtests[0m/
-[m~/Desktop/cs100/rshell
-kchan049@hammer $ #con[K[K[Kdone with testing!
-~/Desktop/cs100/rshell
-kchan049@hammer $ exit
+kchan049@hammer $ exit;
 exit
 
-Script done on Fri 17 Apr 2015 07:30:20 PM PDT
+Script done on Fri 17 Apr 2015 10:25:34 PM PDT
