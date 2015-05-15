@@ -79,3 +79,46 @@ Example: bin/ls -alR, bin/ls parameter -lRa
 -flags must be exactly l,a, R. Lower case version of R will not work and uppercase version of l a will not work.
 
 -everytime there is a perror, the program will automatically exit
+ 
+### Installation for io redirection and piping
+To install and run rshell on your computer, open terminal and type the following commands:
+
+```
+1. git clone http://www.github.com/kchan049/rshell.git
+
+2. cd rshell
+
+3. git checkout hw2
+
+4. make rshell or make 
+
+5. bin/rshell
+```
+###Program Features and Bugs for LS
+
+-The two extra credit are implemented and work perfectly but the <<< operator only works on double quotes as specified
+
+-The extra credit part 2 works like this:
+
+```
+Example: g++ main.cpp 2> errors
+Example: g++ main.cpp 2>> errors
+```
+
+-If you combine hw0 operators and hw2 operators, the program will not work!
+
+-The program supports one instance of each method of redirection and it can also support multiple pipes
+
+-The '<' symbol will run input redirection if the syntax is (command '<' <file>)
+
+-The '>' symbol will run output redirection if the syntax is (command '>' <file>)
+
+-The '>>' symbol will run output redirection (append) if the syntax is (command '>>' <file>)
+
+-The '|' symbol will run piping and can be grouped multiple times with the syntax (file '|' command '|' command)
+
+-The program doesn't support multiple instances of each method of redirection.
+
+
+
+
