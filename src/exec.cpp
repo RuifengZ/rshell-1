@@ -433,7 +433,6 @@ int main()
 			string single="<";
 			string result;
 			int out=-1,in=-1;
-			int fd[2];
 			string left=stringinput.substr(0,stringinput.find(single));
 			string right=stringinput.substr(stringinput.find(single)+single.size());
 			string prev=right;
@@ -492,10 +491,55 @@ int main()
 		}
 		else if (stringinput.find("|") != string::npos)
 		{	
+			//removes signes from stringinput
+			int tt = 0;
+			bool out = false;
+			bool appen = false;
+			tt = stringinput.find("<");
+			if (tt >= 0)
+				stringinput.erase(tt, 1);
+			tt = stringinput.find(">");
+			if (tt >= 0)
+			{
+				out = true;
+			//	stringinput.erase(tt,1);
+			}
+			tt = stringinput.find(">>");
+			if (tt >= 0)
+			{
+			//	stringinput.erase(tt,2);
+				appen = true;
+			}
+			tt= stringinput.find("<<<");
+			if (tt >= 0)
+				stringinput.erase(tt, 3);
+
+
+
+			if (out)
+			{
+				int i = 0;
+				i = stringinput.find("|");
+				stringinput = stringinput.substr(i + 1);
+				goto out;
+
+
+
+			}
+			if (appen)
+			{
+				int i = 0;
+				i = stringinput.find("|");
+				stringinput = stringinput.substr(i + 1);
+				goto appen;
+
+
+			}
+
 			a.clear();
 			bool b = true;
 			string singlein="|";
-			int index;
+			size_t index;
 			//while loop makes a vector of all the arguments passed in with a pipe
 			//while loop also creates a pipe for all the arguments
 			pipeid tmp;
@@ -518,7 +562,7 @@ int main()
 			}
 			a.push_back(tmp);
 			//loop through and execute all arguemnts 
-			int i = 0;
+			size_t i = 0;
 			while(i != a.size())
 			{
 				//sets the pipe 
@@ -564,19 +608,29 @@ int main()
 
         else if(stringinput.find(">>")!=string::npos)
 		{
-			int in=-1,out=-1;
+		appen:
 			string doublein=">>";
 			int perm=O_RDWR|O_CREAT;
 			perm |= O_APPEND;
 			int index=stringinput.find(doublein);
+			//extra credit part 2
+			if(stringinput.find("2>>")!=string::npos)
+				index--;
+			if(stringinput.find("1>>")!=string::npos)
+				index--;
 			string left=stringinput.substr(0,index);
 			string right=stringinput.substr(stringinput.find(doublein)+doublein.size());
+			//open files
 			int good=openF(right,perm);
 			pid_t pid=fork();
 			if(pid==-1)
 				perror("fork");
 			else if(pid==0)
-				execR(left,in,good,-1);
+			{
+				if (stringinput.find("2>>")!=string::npos)
+					execR(left, -1, -1, good);
+				execR(left,-1,good,-1);
+			}
 			else
 			{
 				if(wait(0)==-1)
@@ -593,7 +647,7 @@ int main()
 		}
 		else if(stringinput.find(">")!=string::npos)
 		{
-			int in=-1,out=-1;
+		out:
 			string singlein=">";
 			int perm=O_RDWR|O_CREAT;
 			perm |= O_TRUNC;
@@ -611,9 +665,9 @@ int main()
 			else if(pid==0)
 			{
 				if	(stringinput.find("2>")!=string::npos)
-					execR(left,in,-1,good);
+					execR(left,-1,-1,good);
 				else
-					execR(left,in,good,-1);
+					execR(left,-1,good,-1);
 			}
 			else
 			{
@@ -664,10 +718,10 @@ int main()
                     //finds a invalid command
                     if(good==-1)
                     {
-                        perror("Command is bad and not good!");
                         for(counter=0,it1=tok.begin(); it1!=tok.end(); it1++,counter++)
 							delete[] input[counter];
 						exit(1);
+ 						perror("Command is bad and not good!");
                     }
                 }
                 else if(pid>=1)
