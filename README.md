@@ -94,7 +94,7 @@ To install and run rshell on your computer, open terminal and type the following
 
 5. bin/rshell
 ```
-###Program Features and Bugs for LS
+###Program Features and Bugs for IO Redirection and Piping
 
 -The two extra credit are implemented and work perfectly but the <<< operator only works on double quotes as specified
 
