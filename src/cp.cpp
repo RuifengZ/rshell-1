@@ -31,8 +31,17 @@ void systemcall(char *filein, char *fileout, int size)
 			exit(1);
 		}
 	}
-	close(in);
-	close(out);
+	if(close(in)==-1)
+	{
+		perror("close");
+		exit(1);
+	}
+	
+	if(close(out)==-1)
+	{
+		perror("close");
+		exit(1);
+	}
 }
 void checkexist(char *name)
 {
