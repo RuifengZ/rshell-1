@@ -13,7 +13,8 @@
 using namespace std; 
 using namespace boost; //this function checks for which file descriptor 
 
-
+bool triplecheck=false;
+bool singlecheck=false;
 struct pipeid
 {
 	string left;
@@ -358,7 +359,7 @@ int main()
 				}
 				char *buffer=new char[result.size()];
 				strcpy(buffer,result.c_str());
-				if(write(fd[1],buffer,strlen(buffer))==-1)
+				if(write(fd[1],buffer,result.size())==-1)
 				{
 					perror("write");
 					exit(1);
@@ -379,16 +380,19 @@ int main()
 			string left=stringinput.substr(0,stringinput.find(single));
 			string right=stringinput.substr(stringinput.find(single)+single.size());
 			string prev=right;
+			//checks for additional symbols right after <<<
 			if(right.find(">")!=string::npos)
 			{
 				prev=prev.substr(0,right.find(">"));
 				int perm=O_RDWR|O_CREAT;
 				int index;
+				//if it sees output append then it appends
 				if(right.find(">>")!=string::npos)
 				{
 					perm |= O_APPEND;
 					index=right.find(">>")+2;
 				}
+				//if it sees output then it destructs
 				else
 				{
 					perm |= O_TRUNC;
@@ -486,7 +490,6 @@ int main()
 					}
 				}
 			}
-
 
 		}
 		else if (stringinput.find("|") != string::npos)
