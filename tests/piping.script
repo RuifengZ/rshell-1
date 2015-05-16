@@ -1,6 +1,6 @@
-Script started on Sat 16 May 2015 01:03:36 PM PDT
+Script started on Sat 16 May 2015 01:30:42 PM PDT
 ~
-kchan049@hammer $ cs100
+kchan049@hammer $ s[Kcs100
 [0;91m
 ===============================================================================
 |                                                                             |
@@ -21,19 +21,20 @@ kchan049@hammer $ cs100
 |                                                                             |
 ===============================================================================
 [0m
-[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m ls
-assn3.asm  assn4.asm  assn5.asm  assn6.asm  Desktop  Downloads	lab5
-[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd Dektop[K[K[K[Ksktop/cs100/rshell/
-[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~/Desktop/cs100/rshell[0;95m (master) [0;36m$[0m ls
-bin  dad  LICENSE  Makefile  README.md	src  tests
+[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd Desktop/cs100/rshell/
+[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~/Desktop/cs100/rshell[0;95m (master) [0;36m$[0m bin/rhsel[K[K[K[Khell[K[K[K[Kshell
+bash: bin/rshell: No such file or directory
+[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~/Desktop/cs100/rshell[0;95m (master) [0;36m$[0m make rshell
+mkdir -p ./bin
+g++ -Wall -Werror -pedantic -ansi  ./src/exec.cpp -o ./bin/rshell
 [s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~/Desktop/cs100/rshell[0;95m (master) [0;36m$[0m bin/rshell
-kchan049@hammer.cs.ucr.edu$ #input drei    redirection
+kchan049@hammer.cs.ucr.edu$ #input redirection
+kchan049@hammer.cs.ucr.edu$ #creating an existing file
 kchan049@hammer.cs.ucr.edu$ ls -a > test
-kchan049@hammer.cs.ucr.edu$ cat     #  existing file              cat < test
+kchan049@hammer.cs.ucr.edu$ cat < test
 .
 ..
 bin
-dad
 .git
 LICENSE
 Makefile
@@ -41,17 +42,16 @@ README.md
 src
 test
 tests
-
-kchan049@hammer.cs.ucr.edu$ cat < test1 t100    100
+kchan049@hammer.cs.ucr.edu$ #nonexisting file
+kchan049@hammer.cs.ucr.edu$ cat < test1
 open: No such file or directory
 in: No such file or directory
 ^C
-[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~/Desktop/cs100/rshell[0;95m (master) [0;36m$[0m bin/rshell 
-kchan049@hammer.cs.ucr.edu$ cat      <     test
+[s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~/Desktop/cs100/rshell[0;95m (master) [0;36m$[0m bin/rshell
+kchan049@hammer.cs.ucr.edu$ cat      <      test
 .
 ..
 bin
-dad
 .git
 LICENSE
 Makefile
@@ -59,12 +59,10 @@ README.md
 src
 test
 tests
-
-kchan049@hammer.cs.ucr.edu$ cat      cat    <    test
+kchan049@hammer.cs.ucr.edu$      cat      <    test
 .
 ..
 bin
-dad
 .git
 LICENSE
 Makefile
@@ -72,12 +70,10 @@ README.md
 src
 test
 tests
-
 kchan049@hammer.cs.ucr.edu$ cat<test
 .
 ..
 bin
-dad
 .git
 LICENSE
 Makefile
@@ -85,12 +81,10 @@ README.md
 src
 test
 tests
-
 kchan049@hammer.cs.ucr.edu$ cat < test | ls -a
 .
 ..
 bin
-dad
 .git
 LICENSE
 Makefile
@@ -98,14 +92,12 @@ README.md
 src
 test
 tests
-
-kchan049@hammer.cs.ucr.edu$ #output redirc ection
+kchan049@hammer.cs.ucr.edu$ #output redirection
 kchan049@hammer.cs.ucr.edu$ ls -a > test1
 kchan049@hammer.cs.ucr.edu$ cat < test1
 .
 ..
 bin
-dad
 .git
 LICENSE
 Makefile
@@ -114,14 +106,12 @@ src
 test
 test1
 tests
-
 kchan049@hammer.cs.ucr.edu$ ls -a > abc
 kchan049@hammer.cs.ucr.edu$ cat < abc
 .
 ..
 abc
 bin
-dad
 .git
 LICENSE
 Makefile
@@ -130,7 +120,34 @@ src
 test
 test1
 tests
-
+kchan049@hammer.cs.ucr.edu$ ls -a >>>         
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ ls -a >> abc
+kchan049@hammer.cs.ucr.edu$ cat < abc
+.
+..
+abc
+bin
+.git
+LICENSE
+Makefile
+README.md
+src
+test
+test1
+tests
+.
+..
+abc
+bin
+.git
+LICENSE
+Makefile
+README.md
+src
+test
+test1
+tests
 kchan049@hammer.cs.ucr.edu$ ls -a >> abcd
 kchan049@hammer.cs.ucr.edu$ cat < abcd
 .
@@ -138,7 +155,6 @@ kchan049@hammer.cs.ucr.edu$ cat < abcd
 abc
 abcd
 bin
-dad
 .git
 LICENSE
 Makefile
@@ -147,60 +163,10 @@ src
 test
 test1
 tests
-
-kchan049@hammer.cs.ucr.edu$ ls -a >> abc
-kchan049@hammer.cs.ucr.edu$ cat < abc
-.
-..
-abc
-bin
-dad
-.git
-LICENSE
-Makefile
-README.md
-src
-test
-test1
-tests
-.
-..
-abc
-abcd
-bin
-dad
-.git
-LICENSE
-Makefile
-README.md
-src
-test
-test1
-tests
-
-kchan049@hammer.cs.ucr.edu$ ls -a >> 111
-kchan049@hammer.cs.ucr.edu$ cat < 111
-.
-..
-111
-abc
-abcd
-bin
-dad
-.git
-LICENSE
-Makefile
-README.md
-src
-test
-test1
-tests
-
-kchan049@hammer.cs.ucr.edu$ ls -a>          ls   -a    >     dad
+kchan049@hammer.cs.ucr.edu$    ls    -a    >    dad
 kchan049@hammer.cs.ucr.edu$ cat < dad
 .
 ..
-111
 abc
 abcd
 bin
@@ -213,12 +179,40 @@ src
 test
 test1
 tests
-
-kchan049@hammer.cs.ucr.edu$ ls        ls -a          >dad   mom
+kchan049@hammer.cs.ucr.edu$     ls    -a >>     dad
+kchan049@hammer.cs.ucr.edu$ cat < dad
+.
+..
+abc
+abcd
+bin
+dad
+.git
+LICENSE
+Makefile
+README.md
+src
+test
+test1
+tests
+.
+..
+abc
+abcd
+bin
+dad
+.git
+LICENSE
+Makefile
+README.md
+src
+test
+test1
+tests
+kchan049@hammer.cs.ucr.edu$ ls -a>mom
 kchan049@hammer.cs.ucr.edu$ cat < mom
 .
 ..
-111
 abc
 abcd
 bin
@@ -232,12 +226,10 @@ src
 test
 test1
 tests
-
-kchan049@hammer.cs.ucr.edu$ ls                 ls     -a    >>     wat
-kchan049@hammer.cs.ucr.edu$ cat < wat
+kchan049@hammer.cs.ucr.edu$ ls -a>>moms
+kchan049@hammer.cs.ucr.edu$ cat < moms
 .
 ..
-111
 abc
 abcd
 bin
@@ -246,64 +238,42 @@ dad
 LICENSE
 Makefile
 mom
+moms
 README.md
 src
 test
 test1
 tests
-wat
-
-kchan049@hammer.cs.ucr.edu$ ls -a>wat   watthe
-kchan049@hammer.cs.ucr.edu$ cat < watthe
-.
-..
-111
-abc
-abcd
-bin
-dad
-.git
-LICENSE
-Makefile
-mom
-README.md
-src
-test
-test1
-tests
-wat
-watthe
-
 kchan049@hammer.cs.ucr.edu$ #piping
 kchan049@hammer.cs.ucr.edu$ ls | ls
-111  abcd  dad	    Makefile  README.md  test	tests  watthe
-abc  bin   LICENSE  mom       src	 test1	wat
-kchan049@hammer.cs.ucr.edu$ ls ||  grep e
+abc   bin  LICENSE   mom   README.md  test   tests
+abcd  dad  Makefile  moms  src	      test1
+kchan049@hammer.cs.ucr.edu$ ls | grep e
 Makefile
 test
 test1
 tests
-watthe
 kchan049@hammer.cs.ucr.edu$ ls | grep e | grep t
 test
 test1
 tests
-watthe
-kchan049@hammer.cs.ucr.edu$ ls     |     grep   e
+kchan049@hammer.cs.ucr.edu$ ls      |       grep e     e
 Makefile
 test
 test1
 tests
-watthe
+kchan049@hammer.cs.ucr.edu$   ls    |   grep    e
+Makefile
+test
+test1
+tests
 kchan049@hammer.cs.ucr.edu$ ls|grep e
 Makefile
 test
 test1
 tests
-watthe
 kchan049@hammer.cs.ucr.edu$ ls | ls > www
 kchan049@hammer.cs.ucr.edu$ cat < www
-111
 abc
 abcd
 bin
@@ -311,23 +281,18 @@ dad
 LICENSE
 Makefile
 mom
+moms
 README.md
 src
 test
 test1
 tests
-wat
-watthe
 www
-
-kchan049@hammer.cs.ucr.edu$ 
 kchan049@hammer.cs.ucr.edu$ cat < test1 | ls -a | cat > test2
-
 kchan049@hammer.cs.ucr.edu$ cat < test2
 .
 ..
 bin
-dad
 .git
 LICENSE
 Makefile
@@ -336,24 +301,22 @@ src
 test
 test1
 tests
-
 kchan049@hammer.cs.ucr.edu$ #extra credit 1
-kchan049@hammer.cs.ucr.edu$ cat <<< "extra crei dit rocks"
-extra credit rocks
-kchan049@hammer.cs.ucr.edu$ cat <<< "extra credit rocks  " > extra
+kchan049@hammer.cs.ucr.edu$ cat <<< "extra credit rocks!"
+extra credit rocks!
+kchan049@hammer.cs.ucr.edu$ cat <<< "extra credit rocks!" > extra
 
 kchan049@hammer.cs.ucr.edu$ cat < extra
-extra credit rocks
-kchan049@hammer.cs.ucr.edu$ cat      <<<      "extra credit rocks"
-extra credit rocks
-kchan049@hammer.cs.ucr.edu$ cat<<<"extracreditrocks"
-extracreditrocks
+extra credit rocks!kchan049@hammer.cs.ucr.edu$ cat <<< "extra"
+extra
+kchan049@hammer.cs.ucr.edu$ cat<<<"extracredit"
+extracredit
+kchan049@hammer.cs.ucr.edu$ #newline recorded in my README for extra credit as a bug
 kchan049@hammer.cs.ucr.edu$ #extra credit 2
 kchan049@hammer.cs.ucr.edu$ ls -a 1> asdf
 kchan049@hammer.cs.ucr.edu$ cat < asdf
 .
 ..
-111
 abc
 abcd
 asdf
@@ -364,21 +327,18 @@ extra
 LICENSE
 Makefile
 mom
+moms
 README.md
 src
 test
 test1
 test2
 tests
-wat
-watthe
 www
-
 kchan049@hammer.cs.ucr.edu$ ls -a 1>> asdf
 kchan049@hammer.cs.ucr.edu$ cat < asdf
 .
 ..
-111
 abc
 abcd
 asdf
@@ -389,18 +349,16 @@ extra
 LICENSE
 Makefile
 mom
+moms
 README.md
 src
 test
 test1
 test2
 tests
-wat
-watthe
 www
 .
 ..
-111
 abc
 abcd
 asdf
@@ -411,23 +369,43 @@ extra
 LICENSE
 Makefile
 mom
+moms
 README.md
 src
 test
 test1
 test2
 tests
-wat
-watthe
 www
-
-kchan049@hammer.cs.ucr.edu$ g++   touch dad.cpp
+kchan049@hammer.cs.ucr.edu$ tocu    #missedtyped
+kchan049@hammer.cs.ucr.edu$ g 
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ touch dad.cpp
+kchan049@hammer.cs.ucr.edu$ g++ touch.cpp 2> asdf'                      #miss typed again
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ 
 kchan049@hammer.cs.ucr.edu$ g++ touch.cpp 2> asdf
 kchan049@hammer.cs.ucr.edu$ cat < asdf
 g++: error: touch.cpp: No such file or directory
 g++: fatal error: no input files
 compilation terminated.
+kchan049@hammer.cs.ucr.edu$ gi  
+kchan049@hammer.cs.ucr.edu$ 
+kchan049@hammer.cs.ucr.edu$ g++ touh        
+kchan049@hammer.cs.ucr.edu$ 
 
+kchan049@hammer.cs.ucr.edu$ kchan049@hammer.cs.ucr.edu$ g 
+kchan049@hammer.cs.ucr.edu$ 
 kchan049@hammer.cs.ucr.edu$ g++ touch.cpp 2>> asdf
 kchan049@hammer.cs.ucr.edu$ cat < asdf
 g++: error: touch.cpp: No such file or directory
@@ -436,13 +414,14 @@ compilation terminated.
 g++: error: touch.cpp: No such file or directory
 g++: fatal error: no input files
 compilation terminated.
-
-kchan049@hammer.cs.ucr.edu$ #done with scripting
+kchan049@hammer.cs.ucr.edu$ #extra credit 1 and 2 work
+kchan049@hammer.cs.ucr.edu$ #done with script
 kchan049@hammer.cs.ucr.edu$ exit
 [s%%%%%%%%%%[u[0;32mkchan049[0;36m@[0;32mcs100[0;36m:[0;32m~/Desktop/cs100/rshell[0;95m (master) [0;36m$[0m exit
 exit
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
 ~
 kchan049@hammer $ exit
 exit
 
-Script done on Sat 16 May 2015 01:20:27 PM PDT
+Script done on Sat 16 May 2015 01:44:49 PM PDT
