@@ -98,6 +98,8 @@ To install and run rshell on your computer, open terminal and type the following
 
 -The two extra credit are implemented and work perfectly but the <<< operator only works on double quotes as specified
 
+-However, extra credit part 1 might have some newline bugs as shown in the script!.
+
 -The extra credit part 2 works like this:
 
 ```
