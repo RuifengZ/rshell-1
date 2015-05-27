@@ -8,10 +8,23 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <signal.h>
 #include <sys/types.h>
 #include<boost/tokenizer.hpp> 
 using namespace std; 
 using namespace boost; //this function checks for which file descriptor 
+
+void signalhandler(int signum)
+{
+	switch(signum)
+	{
+		case SIGINT:
+			break;
+		case SIGTSTP:
+			raise(SIGSTOP);
+			cout << "Stopped!" << endl;
+	}
+}
 
 bool triplecheck=false;
 bool singlecheck=false;
@@ -219,6 +232,18 @@ void execR(const string &in, int sin, int sout, int serr)
 }
 int main()
 {
+	struct sigaction newaction, oldaction;
+	newaction.sa_handler=signalhandler;
+	sigemptyset(&newaction.sa_mask);
+	newaction.sa_flags=SA_RESTART;
+
+	sigaction(SIGINT,NULL,&oldaction);
+	if(oldaction.sa_handler!=SIG_IGN)
+	sigaction(SIGINT,&newaction,NULL);
+
+	sigaction(SIGTSTP,NULL,&oldaction);
+	if(oldaction.sa_handler!=SIG_IGN)
+	sigaction(SIGTSTP,&newaction,NULL);
     char hostname[999];
     if(gethostname(hostname, 999)==-1)
 		perror("hostname");
