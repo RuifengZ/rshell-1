@@ -90,7 +90,7 @@ To install and run rshell on your computer, open terminal and type the following
 
 3. git checkout hw2
 
-4. make rshell or make 
+4. make 
 
 5. bin/rshell
 ```
