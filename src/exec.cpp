@@ -10,6 +10,7 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <sys/types.h>
+#include <algorithm>
 #include<boost/tokenizer.hpp> 
 using namespace std; 
 using namespace boost; //this function checks for which file descriptor 
@@ -250,16 +251,46 @@ int main()
 	char login[999];
 	if(getlogin_r(login,999)==-1)
 		perror("login");
-    
-	string stringinput;
+   	/*char current[BUFSIZ];
+	if(getcwd(current,current.size())==NULL)
+	{
+		perror("getcwd");
+		exit(1);
+	}
+	char *home;
+	if((home=getenv("HOME"))==NULL)
+	{
+		perror("getenv");
+		exit(1);
+	}
+	string checkhome=home;
+	string checkcwd=current;
+	*/string stringinput;
     char* input[999];
     char_separator<char> ands("&&");
     char_separator<char> ors("||");
     char_separator<char> semico(";");
     while(true)
     {
-        //if the user name and hostname both exists, then the program displays it before the dollar sign.
-        cout << login << "@" << hostname << "$ ";
+        char current[BUFSIZ];
+		if(getcwd(current,BUFSIZ)==NULL)
+		{	
+			perror("getcwd");
+			exit(1);
+		}
+		char *home;
+		if((home=getenv("HOME"))==NULL)
+		{
+			perror("getenv");
+			exit(1);
+		}
+		string checkhome=home;
+		string checkcwd=current;
+		if(checkcwd.find(checkhome)!=string::npos)
+
+		checkcwd.replace(checkcwd.find(checkhome),checkhome.size(),"~");
+		cout << login << "@" << hostname << ":" << checkcwd.c_str() << "$ " ;
+		//if the user name and hostname both exists, then the program displays it before the dollar sign.
         getline(cin,stringinput);
         //this checks for comments. Basically, everything after the hash symbol is useless
         if(stringinput.find("#") != string::npos)
