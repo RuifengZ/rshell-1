@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <algorithm>
 #include <signal.h>
 #include <sys/types.h>
 #include <algorithm>
@@ -238,13 +239,29 @@ int main()
 	sigemptyset(&newaction.sa_mask);
 	newaction.sa_flags=SA_RESTART;
 
-	sigaction(SIGINT,NULL,&oldaction);
+	if(sigaction(SIGINT,NULL,&oldaction)==-1)
+	{
+		perror("sigaction");
+		exit(1);
+	}
 	if(oldaction.sa_handler!=SIG_IGN)
-	sigaction(SIGINT,&newaction,NULL);
+	if(sigaction(SIGINT,&newaction,NULL)==-1)
+	{
+		perror("sigaction");
+		exit(1);
+	}
 
-	sigaction(SIGTSTP,NULL,&oldaction);
+	if(sigaction(SIGTSTP,NULL,&oldaction)==-1)
+	{
+		perror("sigaction");
+		exit(1);
+	}
 	if(oldaction.sa_handler!=SIG_IGN)
-	sigaction(SIGTSTP,&newaction,NULL);
+	if(sigaction(SIGTSTP,&newaction,NULL)==-1)
+	{
+		perror("sigaction");
+		exit(1);
+	}
     char hostname[999];
     if(gethostname(hostname, 999)==-1)
 		perror("hostname");
@@ -345,6 +362,118 @@ int main()
                 continue;
         }
         //this checks for &&
+		else if(stringinput.find("cd")!=string::npos)
+		{
+			//rem space
+			std::string in;
+			size_t start = stringinput.find_first_not_of(" \t\f\v\r");
+			if (start != std::string::npos)
+			{
+				//removes leading white space
+				in = stringinput.substr(start);
+			}
+			size_t end = in.find_last_not_of(" \t\f\v\r");
+			if (end != std::string::npos)
+			{
+				//removes ending white spaces 
+				in = in.substr(0, end + 1);
+			}
+			//if return 
+			if (stringinput.find("-")!=string::npos)
+			{
+				char* tmp;
+				if((tmp=getenv("PWD"))==NULL)
+				{
+					perror("getenv");
+					exit(1);
+				}
+				char* old;
+				if((old=getenv("OLDPWD"))==NULL)
+				{
+					perror("getenv");
+					exit(1);
+				}
+				if(setenv("PWD",old,1)==-1)
+				{
+					perror("setenv");
+					exit(1);
+				}
+				if(chdir(old)==-1)
+				{
+					perror("chdir");
+					exit(1);
+				}
+				if(setenv("OLDPWD",tmp,1)==-1)
+				{
+					perror("setenv");
+					exit(1);
+				}
+			}
+			//if just cd
+			else if (stringinput.find("cd")!=string::npos && stringinput.size()==2)
+			{
+				char *tmp;
+				if((tmp=getenv("PWD"))=NULL)
+				{
+					perror("getenv");
+					exit(1);
+				}
+				if((setenv("OLDPWD",tmp,1))==-1)
+				{
+					perror("setenv");
+					exit(1);
+				}
+				if((tmp=getenv("HOME"))==NULL)
+				{
+					perror("getenv");
+					exit(1);
+				}
+				if((setenv("PWD",tmp,1))==-1)
+				{
+					perror("setenv");
+					exit(1);
+				}
+				if(chdir(tmp)==-1)
+				{
+					perror("chdir");
+					exit(1);
+				}
+			}
+			//if cd path
+			else
+			{
+					in.erase(0,2);
+					//rem space
+					size_t start = in.find_first_not_of(" \t\f\v\r");
+					if (start != std::string::npos)
+					{
+						//removes leading white space
+						in = in.substr(start);
+					}
+					size_t end = in.find_last_not_of(" \t\f\v\r");
+					if (end != std::string::npos)
+					{
+						//removes ending white spaces 
+						in = in.substr(0, end + 1);
+					}
+					if (in.find(" ") < 0)
+					{
+						cout << "format for cd wrong";
+						exit(1);
+
+					}
+					//get and set old pwd
+					char * tmp;
+					tmp = getenv("PWD");
+					setenv("OLDPWD", tmp, 1);
+					//set pwd
+					setenv("PWD", in.c_str(),1);
+					//go to in
+					chdir(in.c_str());
+			}
+
+
+		}
         else if(stringinput.find("&&")!=string::npos )
         {
             if(stringinput.find("exit")!=string::npos)
