@@ -15,16 +15,24 @@
 #include<boost/tokenizer.hpp> 
 using namespace std; 
 using namespace boost; //this function checks for which file descriptor 
-
+pid_t curpid=0;
 void signalhandler(int signum)
 {
 	switch(signum)
 	{
 		case SIGINT:
+			if(curpid!=0)
+			{
+				kill(curpid,SIGKILL);
+				curpid=0;
+			}
 			break;
 		case SIGTSTP:
-			raise(SIGSTOP);
-			cout << "Stopped!" << endl;
+			if(curpid!=0)
+			{
+				kill(curpid,SIGSTOP);
+				cout << "Stopped!" << endl;
+			}
 	}
 }
 
@@ -325,6 +333,7 @@ int main()
                 tokenizer<char_separator<char> > tok(*it, space);
                 int status=0;
                 pid_t pid = fork();
+				curpid=pid;
                 if(pid==-1)
                 {        
                     perror("this is an error with fork()");
@@ -365,19 +374,20 @@ int main()
 		else if(stringinput.find("cd")!=string::npos)
 		{
 			//rem space
-			std::string in;
-			size_t start = stringinput.find_first_not_of(" \t\f\v\r");
+			string in;
+			size_t start = stringinput.find_first_not_of(" \t");
 			if (start != std::string::npos)
 			{
 				//removes leading white space
 				in = stringinput.substr(start);
 			}
-			size_t end = in.find_last_not_of(" \t\f\v\r");
+			size_t end = in.find_last_not_of(" \t");
 			if (end != std::string::npos)
 			{
 				//removes ending white spaces 
 				in = in.substr(0, end + 1);
 			}
+	
 			//if return 
 			if (stringinput.find("-")!=string::npos)
 			{
@@ -444,13 +454,13 @@ int main()
 			{
 					in.erase(0,2);
 					//rem space
-					size_t start = in.find_first_not_of(" \t\f\v\r");
+					size_t start = in.find_first_not_of(" \t");
 					if (start != std::string::npos)
 					{
 						//removes leading white space
 						in = in.substr(start);
 					}
-					size_t end = in.find_last_not_of(" \t\f\v\r");
+					size_t end = in.find_last_not_of(" \t");
 					if (end != std::string::npos)
 					{
 						//removes ending white spaces 
@@ -474,6 +484,29 @@ int main()
 
 
 		}
+		else if(stringinput.find("bg")!=string::npos)
+		{
+			if(curpid!=0)
+			{
+				kill(curpid,SIGCONT);
+				curpid=0;
+			}
+			else
+			{
+				cout << "no processes found!" << endl;
+			}
+		}
+		else if(stringinput.find("fg")!=string::npos)
+		{
+			if(curpid!=0)
+			{
+				kill(curpid,SIGCONT);
+			}
+			else
+			{
+				cout << "no processes found!" << endl;
+			}
+		}
         else if(stringinput.find("&&")!=string::npos )
         {
             if(stringinput.find("exit")!=string::npos)
@@ -486,6 +519,7 @@ int main()
                 tokenizer<char_separator<char> > tok(*it, space);
                 int status=0;
                 pid_t pid = fork();
+				curpid=pid;
                 if(pid==-1)
                 {        
                     perror("this is an error with fork()");
@@ -587,6 +621,7 @@ int main()
 				out=openF(right,perm);
 			}
 			pid_t pid=fork();
+			curpid=pid;
 			if(pid==-1)
 				perror("fork");
 			else if(pid==0)
@@ -647,6 +682,7 @@ int main()
 				out=openF(right,perm);
 			}
 			pid_t pid=fork();
+			curpid=pid;
 			if(pid==-1)
 				perror("fork");
 			else if(pid==0)
@@ -780,6 +816,7 @@ int main()
 				//forks and executes the commands 
 
 				pid_t pid=fork();
+				curpid=pid;
 				if(pid==-1)
 					perror("fork");
 				else if(pid==0)
@@ -811,6 +848,7 @@ int main()
 			//open files
 			int good=openF(right,perm);
 			pid_t pid=fork();
+			curpid=pid;
 			if(pid==-1)
 				perror("fork");
 			else if(pid==0)
@@ -848,6 +886,7 @@ int main()
 			string right=stringinput.substr(stringinput.find(singlein)+singlein.size());
 			int good=openF(right,perm);
 			pid_t pid=fork();
+			curpid=pid;
 			if(pid==-1)
 				perror("fork");
 			else if(pid==0)
@@ -882,6 +921,7 @@ int main()
                 tokenizer<char_separator<char> > tok(*it, space);
                 int status=0;
                 pid_t pid = fork();
+				curpid=pid;
                 if(pid==-1)
                 {        
                     perror("this is an error with fork()");
