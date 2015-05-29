@@ -23,14 +23,16 @@ void signalhandler(int signum)
 		case SIGINT:
 			if(curpid!=0)
 			{
-				kill(curpid,SIGKILL);
+				if(	kill(curpid,SIGKILL)==-1)
+					perror("kill");
 				curpid=0;
 			}
 			break;
 		case SIGTSTP:
 			if(curpid!=0)
 			{
-				kill(curpid,SIGSTOP);
+				if(kill(curpid,SIGSTOP)==-1)
+					perror("kill");
 				cout << "Stopped!" << endl;
 			}
 	}
@@ -245,7 +247,6 @@ int main()
 	struct sigaction newaction, oldaction;
 	newaction.sa_handler=signalhandler;
 	sigemptyset(&newaction.sa_mask);
-	newaction.sa_flags=SA_RESTART;
 
 	if(sigaction(SIGINT,NULL,&oldaction)==-1)
 	{
@@ -297,7 +298,12 @@ int main()
     char_separator<char> semico(";");
     while(true)
     {
-        char current[BUFSIZ];
+		if(!cin.good())
+		{
+			cin.clear();
+			cout << endl;
+        }
+		char current[BUFSIZ];
 		if(getcwd(current,BUFSIZ)==NULL)
 		{	
 			perror("getcwd");
@@ -479,7 +485,10 @@ int main()
 					//set pwd
 					setenv("PWD", in.c_str(),1);
 					//go to in
-					chdir(in.c_str());
+					if(chdir(in.c_str())==-1)
+					{
+						perror("chdir");
+					}
 			}
 
 
@@ -488,7 +497,8 @@ int main()
 		{
 			if(curpid!=0)
 			{
-				kill(curpid,SIGCONT);
+				if(kill(curpid,SIGCONT)==-1)
+					perror("kill");
 				curpid=0;
 			}
 			else
@@ -500,7 +510,8 @@ int main()
 		{
 			if(curpid!=0)
 			{
-				kill(curpid,SIGCONT);
+				if(kill(curpid,SIGCONT)==-1)
+				perror("kill");
 			}
 			else
 			{
@@ -620,6 +631,7 @@ int main()
 				right=right.substr(index);
 				out=openF(right,perm);
 			}
+			int status=0;
 			pid_t pid=fork();
 			curpid=pid;
 			if(pid==-1)
@@ -628,7 +640,7 @@ int main()
 				execR(left,in,out,-1);
 			else
 			{
-				if(wait(0)==-1)
+				if(wait(&status)==-1)
 				{
 					perror("wait");
 					exit(1);
@@ -828,6 +840,7 @@ int main()
 			}
 			int status = 0;
 			while ( wait(&status) > 0);
+			//perror("wait);
 			reset(b);
 		}
 
@@ -956,7 +969,9 @@ int main()
                 {
                     //waits for the child to finish
                     if(wait(&status)==-1)
-						perror("wait");
+					{
+					//	perror("wait");
+					}
 					//waits for the child to finish
                 }
             }

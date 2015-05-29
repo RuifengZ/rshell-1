@@ -1,0 +1,111 @@
+Script started on Thu 28 May 2015 09:20:19 PM PDT
+~
+kchan049@hammer $ ls
+assn3.asm  assn5.asm  [0m[38;5;27mDesktop[0m/    [38;5;27mlab5[0m/
+assn4.asm  assn6.asm  [38;5;27mDownloads[0m/  [38;5;27mrshell[0m/
+[m~
+kchan049@hammer $ cd Desktop/cs100/rshell/
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/rshell
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ #testing cd -
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ cd -
+kchan049@hammer.cs.ucr.edu:~$ cd -
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ #cd - goes to previous directory and it works!
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ #testing cd alone
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ cd
+kchan049@hammer.cs.ucr.edu:~$ #cd goes to root folder and this means home/user folder
+kchan049@hammer.cs.ucr.edu:~$ cd Desktop
+kchan049@hammer.cs.ucr.edu:~/Desktop$ #cd path
+kchan049@hammer.cs.ucr.edu:~/Desktop$ cd cs100/rshell
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ #goes up a directory
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ cd .
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ #stays in the same directory
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ cd ..
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100$ #goes back a directory
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100$ cd rshell/..
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100$ #goes to rshell and back so it sa tays in the same directory
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100$ cd awiefoj
+chdir: No such file or directory
+~/Desktop/cs100/rshell
+kchan049@hammer $ ls
+[0m[38;5;27mbin[0m/  LICENSE  Makefile  README.md  [38;5;27msrc[0m/  [38;5;27mtests[0m/
+[m~/Desktop/cs100/rshell
+kchan049@hammer $ cd sr[K[K[K[K[K#as you can see it exited
+~/Desktop/cs100/rshell
+kchan049@hammer $ bin/rshell
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ #when i typed cd awiefoj it was a non existent directory so it ope   displayed error message and exitted
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ ^C
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ ^C
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ ^C
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ #control c doesnt completely stop the entire shell
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ cat 
+hi
+hi
+^Ckchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ #sends sigint to program
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ #extra credit starts now
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ 3 #i made a test program that is similar to the lab
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ # it prints out hi in an infinitely   loop and i will use ctrl z fg bg to handle and control the program
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ ls
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ bin  LICENSE  Makefile	README.md  src	tests
+^C
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ cd src
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ ./test	
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ hi
+hi
+hi
+hi
+hi
+hi
+^ZStopped!
+
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ #as you can see ctrl z stopped the program and didnt exit the rshell
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ fg
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ hi
+hi
+hi
+hi
+hi
+hi
+hi
+^ZStopped!
+
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ #you can see that fg works
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ #now lets try bg command and it wont let you press ctrl z to end it wo  so i will use kill -9 process name
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ bg
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ hi
+hi
+hi
+hi
+hi
+hi
+ps
+  PID TTY          TIME CMD
+30749 pts/33   00:00:00 bash
+30980 pts/33   00:00:00 rshell
+31168 pts/33   00:00:00 test
+31306 pts/33   00:00:00 ps
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ hi
+khi
+ill -hi
+9hi
+hi
+hi
+ 31hi
+1hi
+68
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ #i successfully exited the test process with kill -9 and showed that bg worked
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ #now its time to test our extra credit root with a ~ sign
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell/src$ cd ..
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100/rshell$ cd ..
+kchan049@hammer.cs.ucr.edu:~/Desktop/cs100$ cd ..
+kchan049@hammer.cs.ucr.edu:~/Desktop$ cd ..
+kchan049@hammer.cs.ucr.edu:~$ #when i go back one more directory the ~ changes to home/user
+kchan049@hammer.cs.ucr.edu:~$ cd ..
+kchan049@hammer.cs.ucr.edu:/home/csmajs$ exit
+~/Desktop/cs100/rshell
+kchan049@hammer $ exit
+exit
+
+Script done on Thu 28 May 2015 09:30:23 PM PDT
