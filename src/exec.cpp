@@ -126,13 +126,9 @@ int main()
         //this checks for ; and other things
         else
         {
-            if(stringinput.find("exit")!=string::npos && stringinput.at(0)=='e')
+			if(stringinput.find("exit")!=string::npos && stringinput.at(0)== 'e')
 			{
 				exit(1);
-			}
-			else if(stringinput.at(0)!='e')
-			{
-				
 			}
 			tokenizer<char_separator<char> > toke(stringinput,semico);
             tokenizer<char_separator<char> >::iterator it=toke.begin();
@@ -166,6 +162,8 @@ int main()
                     //finds a invalid command
                     if(good==-1)
                     {
+						if(stringinput.find("exit")!=string::npos)
+						exit(1);
 					   perror("Command is bad and not good!");
 					   exit(1);
                     }
@@ -178,7 +176,10 @@ int main()
                 }
             }
         }
-        if(stringinput.find("exit"))
+		if(stringinput.find("exit")>=4)
+		{
+			continue;
+		}
 		if(stringinput.find("exit")!=string::npos)
         {
             exit(1);
