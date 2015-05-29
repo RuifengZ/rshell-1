@@ -8,10 +8,35 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <algorithm>
+#include <signal.h>
 #include <sys/types.h>
+#include <algorithm>
 #include<boost/tokenizer.hpp> 
 using namespace std; 
 using namespace boost; //this function checks for which file descriptor 
+pid_t curpid=0;
+void signalhandler(int signum)
+{
+	switch(signum)
+	{
+		case SIGINT:
+			if(curpid!=0)
+			{
+				if(	kill(curpid,SIGKILL)==-1)
+					perror("kill");
+				curpid=0;
+			}
+			break;
+		case SIGTSTP:
+			if(curpid!=0)
+			{
+				if(kill(curpid,SIGSTOP)==-1)
+					perror("kill");
+				cout << "Stopped!" << endl;
+			}
+	}
+}
 
 bool triplecheck=false;
 bool singlecheck=false;
@@ -219,22 +244,84 @@ void execR(const string &in, int sin, int sout, int serr)
 }
 int main()
 {
+	struct sigaction newaction, oldaction;
+	newaction.sa_handler=signalhandler;
+	sigemptyset(&newaction.sa_mask);
+
+	if(sigaction(SIGINT,NULL,&oldaction)==-1)
+	{
+		perror("sigaction");
+		exit(1);
+	}
+	if(oldaction.sa_handler!=SIG_IGN)
+	if(sigaction(SIGINT,&newaction,NULL)==-1)
+	{
+		perror("sigaction");
+		exit(1);
+	}
+
+	if(sigaction(SIGTSTP,NULL,&oldaction)==-1)
+	{
+		perror("sigaction");
+		exit(1);
+	}
+	if(oldaction.sa_handler!=SIG_IGN)
+	if(sigaction(SIGTSTP,&newaction,NULL)==-1)
+	{
+		perror("sigaction");
+		exit(1);
+	}
     char hostname[999];
     if(gethostname(hostname, 999)==-1)
 		perror("hostname");
 	char login[999];
 	if(getlogin_r(login,999)==-1)
 		perror("login");
-    
-	string stringinput;
+   	/*char current[BUFSIZ];
+	if(getcwd(current,current.size())==NULL)
+	{
+		perror("getcwd");
+		exit(1);
+	}
+	char *home;
+	if((home=getenv("HOME"))==NULL)
+	{
+		perror("getenv");
+		exit(1);
+	}
+	string checkhome=home;
+	string checkcwd=current;
+	*/string stringinput;
     char* input[999];
     char_separator<char> ands("&&");
     char_separator<char> ors("||");
     char_separator<char> semico(";");
     while(true)
     {
-        //if the user name and hostname both exists, then the program displays it before the dollar sign.
-        cout << login << "@" << hostname << "$ ";
+		if(!cin.good())
+		{
+			cin.clear();
+			cout << endl;
+        }
+		char current[BUFSIZ];
+		if(getcwd(current,BUFSIZ)==NULL)
+		{	
+			perror("getcwd");
+			exit(1);
+		}
+		char *home;
+		if((home=getenv("HOME"))==NULL)
+		{
+			perror("getenv");
+			exit(1);
+		}
+		string checkhome=home;
+		string checkcwd=current;
+		if(checkcwd.find(checkhome)!=string::npos)
+
+		checkcwd.replace(checkcwd.find(checkhome),checkhome.size(),"~");
+		cout << login << "@" << hostname << ":" << checkcwd.c_str() << "$ " ;
+		//if the user name and hostname both exists, then the program displays it before the dollar sign.
         getline(cin,stringinput);
         //this checks for comments. Basically, everything after the hash symbol is useless
         if(stringinput.find("#") != string::npos)
@@ -252,6 +339,7 @@ int main()
                 tokenizer<char_separator<char> > tok(*it, space);
                 int status=0;
                 pid_t pid = fork();
+				curpid=pid;
                 if(pid==-1)
                 {        
                     perror("this is an error with fork()");
@@ -289,6 +377,147 @@ int main()
                 continue;
         }
         //this checks for &&
+		else if(stringinput.find("cd")!=string::npos)
+		{
+			//rem space
+			string in;
+			size_t start = stringinput.find_first_not_of(" \t");
+			if (start != std::string::npos)
+			{
+				//removes leading white space
+				in = stringinput.substr(start);
+			}
+			size_t end = in.find_last_not_of(" \t");
+			if (end != std::string::npos)
+			{
+				//removes ending white spaces 
+				in = in.substr(0, end + 1);
+			}
+	
+			//if return 
+			if (stringinput.find("-")!=string::npos)
+			{
+				char* tmp;
+				if((tmp=getenv("PWD"))==NULL)
+				{
+					perror("getenv");
+					exit(1);
+				}
+				char* old;
+				if((old=getenv("OLDPWD"))==NULL)
+				{
+					perror("getenv");
+					exit(1);
+				}
+				if(setenv("PWD",old,1)==-1)
+				{
+					perror("setenv");
+					exit(1);
+				}
+				if(chdir(old)==-1)
+				{
+					perror("chdir");
+					exit(1);
+				}
+				if(setenv("OLDPWD",tmp,1)==-1)
+				{
+					perror("setenv");
+					exit(1);
+				}
+			}
+			//if just cd
+			else if (stringinput.find("cd")!=string::npos && stringinput.size()==2)
+			{
+				char *tmp;
+				if((tmp=getenv("PWD"))=NULL)
+				{
+					perror("getenv");
+					exit(1);
+				}
+				if((setenv("OLDPWD",tmp,1))==-1)
+				{
+					perror("setenv");
+					exit(1);
+				}
+				if((tmp=getenv("HOME"))==NULL)
+				{
+					perror("getenv");
+					exit(1);
+				}
+				if((setenv("PWD",tmp,1))==-1)
+				{
+					perror("setenv");
+					exit(1);
+				}
+				if(chdir(tmp)==-1)
+				{
+					perror("chdir");
+					exit(1);
+				}
+			}
+			//if cd path
+			else
+			{
+					in.erase(0,2);
+					//rem space
+					size_t start = in.find_first_not_of(" \t");
+					if (start != std::string::npos)
+					{
+						//removes leading white space
+						in = in.substr(start);
+					}
+					size_t end = in.find_last_not_of(" \t");
+					if (end != std::string::npos)
+					{
+						//removes ending white spaces 
+						in = in.substr(0, end + 1);
+					}
+					if (in.find(" ") < 0)
+					{
+						cout << "format for cd wrong";
+						exit(1);
+
+					}
+					//get and set old pwd
+					char * tmp;
+					tmp = getenv("PWD");
+					setenv("OLDPWD", tmp, 1);
+					//set pwd
+					setenv("PWD", in.c_str(),1);
+					//go to in
+					if(chdir(in.c_str())==-1)
+					{
+						perror("chdir");
+					}
+			}
+
+
+		}
+		else if(stringinput.find("bg")!=string::npos)
+		{
+			if(curpid!=0)
+			{
+				if(kill(curpid,SIGCONT)==-1)
+					perror("kill");
+				curpid=0;
+			}
+			else
+			{
+				cout << "no processes found!" << endl;
+			}
+		}
+		else if(stringinput.find("fg")!=string::npos)
+		{
+			if(curpid!=0)
+			{
+				if(kill(curpid,SIGCONT)==-1)
+				perror("kill");
+			}
+			else
+			{
+				cout << "no processes found!" << endl;
+			}
+		}
         else if(stringinput.find("&&")!=string::npos )
         {
             if(stringinput.find("exit")!=string::npos)
@@ -301,6 +530,7 @@ int main()
                 tokenizer<char_separator<char> > tok(*it, space);
                 int status=0;
                 pid_t pid = fork();
+				curpid=pid;
                 if(pid==-1)
                 {        
                     perror("this is an error with fork()");
@@ -401,14 +631,16 @@ int main()
 				right=right.substr(index);
 				out=openF(right,perm);
 			}
+			int status=0;
 			pid_t pid=fork();
+			curpid=pid;
 			if(pid==-1)
 				perror("fork");
 			else if(pid==0)
 				execR(left,in,out,-1);
 			else
 			{
-				if(wait(0)==-1)
+				if(wait(&status)==-1)
 				{
 					perror("wait");
 					exit(1);
@@ -462,6 +694,7 @@ int main()
 				out=openF(right,perm);
 			}
 			pid_t pid=fork();
+			curpid=pid;
 			if(pid==-1)
 				perror("fork");
 			else if(pid==0)
@@ -595,6 +828,7 @@ int main()
 				//forks and executes the commands 
 
 				pid_t pid=fork();
+				curpid=pid;
 				if(pid==-1)
 					perror("fork");
 				else if(pid==0)
@@ -606,6 +840,7 @@ int main()
 			}
 			int status = 0;
 			while ( wait(&status) > 0);
+			//perror("wait);
 			reset(b);
 		}
 
@@ -626,6 +861,7 @@ int main()
 			//open files
 			int good=openF(right,perm);
 			pid_t pid=fork();
+			curpid=pid;
 			if(pid==-1)
 				perror("fork");
 			else if(pid==0)
@@ -663,6 +899,7 @@ int main()
 			string right=stringinput.substr(stringinput.find(singlein)+singlein.size());
 			int good=openF(right,perm);
 			pid_t pid=fork();
+			curpid=pid;
 			if(pid==-1)
 				perror("fork");
 			else if(pid==0)
@@ -697,6 +934,7 @@ int main()
                 tokenizer<char_separator<char> > tok(*it, space);
                 int status=0;
                 pid_t pid = fork();
+				curpid=pid;
                 if(pid==-1)
                 {        
                     perror("this is an error with fork()");
@@ -731,7 +969,9 @@ int main()
                 {
                     //waits for the child to finish
                     if(wait(&status)==-1)
-						perror("wait");
+					{
+					//	perror("wait");
+					}
 					//waits for the child to finish
                 }
             }

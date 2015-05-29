@@ -119,7 +119,42 @@ Example: g++ main.cpp 2>> errors
 
 -The '|' symbol will run piping and can be grouped multiple times with the syntax (file '|' command '|' command)
 
--The program doesn't support multiple instances of each method of redirection.
+-The program doesnt support multiple instances of each method of redirection.
+
+### Installation for io redirection and piping
+To install and run rshell on your computer, open terminal and type the following commands:
+
+```
+1. git clone http://www.github.com/kchan049/rshell.git
+
+2. cd rshell
+
+3. git checkout hw3
+
+4. make 
+
+5. bin/rshell
+```
+###Program Features and Bugs for IO Redirection and Piping
+
+-The three extra credit commands('^z','fg','bg') are implemented and work perfectly as demoed in the script.
+
+-The five point extra credit is also implemented. If the directory contains home/user, it will replace home/user with ~.
+
+-'^z' will do nothing unless a process is trying to be stopped. In that case, it will pause the process and if fg is typed, then it will continue the process. 
+
+-fg resumes a paused process and brings it to the foreground.
+
+-bg resumes a paused process and brings it to the background.
+
+-'^c' will no longer exit the rshell. It will interrupt the current foreground process.
+
+-The cd command will take you back to the home user directory.
+
+-The cd <path> command will lead you into the path.
+
+
+
 
 
 
