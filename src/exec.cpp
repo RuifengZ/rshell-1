@@ -6,10 +6,11 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <sys/wait.h>
+#include <vector>
 #include<boost/tokenizer.hpp>
 using namespace std;
 using namespace boost;
-int main()
+int main(int argc, char **argv)
 {
     char hostname[999];
     if(gethostname(hostname, 999)==-1)
@@ -20,10 +21,11 @@ int main()
     
 	string stringinput;
     char* input[999];
+	vector<string> commands;
     char_separator<char> ands("&&");
     char_separator<char> ors("||");
     char_separator<char> semico(";");
-    while(true)
+	while(true)
     {
         //if the user name and hostname both exists, then the program displays it before the dollar sign.
         cout << login << "@" << hostname << "$ ";
@@ -33,7 +35,7 @@ int main()
         {
             stringinput=stringinput.substr(0,stringinput.find("#"));
         }
-        //this checks for ||
+		//this checks for ||
         if(stringinput.find("||")!=string::npos )
         {
             tokenizer<char_separator<char> > toke(stringinput,ors);
